@@ -47,7 +47,7 @@ Fill out the form with the following information:
 * **Name:** `Additional playbooks`
 * **Organization:** `Default`
 * **Source Control Type:** `Git`
-* **Source Control URL:**
+* **Source Control URL:**martins0611
 +
 [source,text]
 ----
@@ -87,4 +87,4 @@ Press the `Check` button below to proceed to the next challenge.
 
 == Troubleshooting
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/instruqt/issues/new?labels=intro-to-controller&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-project-2&assignees=leogallego[open an issue on GitHub].
+If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[open an issue on GitHub].
