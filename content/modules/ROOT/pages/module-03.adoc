@@ -1,132 +1,132 @@
-= Lab Guide: Creating an Inventory
+= ラボガイド: Inventory の作成
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-_A guide to managing hosts and groups the easy way by creating and populating an inventory in automation controller._
+_automation controller で inventory を作成して内容を追加し、hosts と groups を簡単に管理するためのガイド。_
 
 ---
 
-== Lab Briefing
+== ラボ概要
 
-This section provides an overview of inventories in Ansible Automation Platform.
+このセクションでは、Ansible Automation Platform の inventories について概要を説明します。
 
-=== What are Inventories?
+=== Inventories とは
 
-An **inventory** defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate. It is the fundamental way that Ansible and the automation controller keep track of what systems to manage.
+**inventory** は、playbook 内のコマンド、モジュール、タスクの実行対象となる hosts と host groups を定義します。Ansible と automation controller が管理対象システムを把握するための基本的な仕組みです。
 
 image::Oct-16-2024_at_02.39.15-image.png[Inventories list view in automation controller, opts="border"]
 
-In this challenge, you will be creating a new inventory, adding hosts to it, and then creating a group to organize those hosts.
+このチャレンジでは、新しい inventory を作成し、hosts を追加して、それらを整理する group を作成します。
 
 image::Oct-16-2024_at_02.39.47-image.png[Creating a new inventory, opts="border"]
 
 ---
 
-== Lab Guide: Hands-On Tasks
+== ラボガイド: ハンズオンタスク
 
-An inventory is a collection of hosts against which jobs (like playbooks) may be launched. This is the same concept as an Ansible inventory file, but with a powerful UI and additional features.
+inventory は、ジョブ（playbook など）を実行する対象 hosts の集合です。Ansible の inventory file と同じ考え方ですが、強力な UI と追加機能があります。
 
-Inventories are divided into *groups*, and these groups contain the actual *hosts*. Hosts can be referenced by their IP addresses or their hostnames and can be sourced manually or dynamically from a cloud provider.
+inventories は *groups* に分かれ、各 group に実際の *hosts* が含まれます。hosts は IP アドレスまたはホスト名で指定でき、手動またはクラウドプロバイダーからの動的取得で登録できます。
 
 [IMPORTANT]
 ====
-The credentials for the automation controller are:
+automation controller の認証情報:
 
 * *Username:* `admin`
 * *Password:* `ansible123!`
 ====
 
-=== Task 1: Create the Inventory
+=== Task 1: Inventory を作成する
 
-First, you will create a new, empty inventory to hold your managed nodes.
+最初に、管理対象ノードを格納する空の inventory を作成します。
 
-. **Navigate to the Inventories page.**
+. **Inventories ページへ移動する。**
 +
-In the left navigation menu, go to **Infrastructure** → **Inventories**.
+左側ナビゲーションメニューで **Infrastructure** → **Inventories** に移動します。
 
-. **Create a new inventory.**
+. **新しい inventory を作成する。**
 +
-**Click** the blue **Create inventory** button and select **Create inventory** from the dropdown.
+青色の **Create inventory** ボタンを **クリック** し、ドロップダウンで **Create inventory** を選択します。
 
-. **Enter the inventory details.**
+. **inventory の詳細を入力する。**
 +
-Fill out the form with the following information:
+フォームに以下を入力します。
 +
 * **Name:** `Lab-Inventory`
 * **Organization:** `Default`
 
-. **Save the inventory.**
+. **inventory を保存する。**
 +
-**Click** the blue **Create inventory** button.
+青色の **Create inventory** ボタンを **クリック** します。
 
-=== Task 2: Add Hosts to the Inventory
+=== Task 2: Inventory に Hosts を追加する
 
-Now you will manually add two hosts to your new inventory.
+次に、新しい inventory に 2 台の host を手動で追加します。
 
-NOTE: If you are not already on the `Lab-Inventory` details page, navigate back to it by clicking its name in the inventory list.
+NOTE: `Lab-Inventory` の詳細ページにいない場合は、inventory 一覧で名前をクリックして戻ってください。
 
-. **Navigate to the Hosts tab.**
+. **Hosts タブへ移動する。**
 +
-Within the `Lab-Inventory`, **click** the **Hosts** tab.
+`Lab-Inventory` 内で **Hosts** タブを **クリック** します。
 
-. **Create the first host.**
+. **最初の host を作成する。**
 +
-**Click** the blue **Create host** button. In the *Name* field, enter `node1`. Leave all other fields as they are and **click** *Create host*.
+青色の **Create host** ボタンを **クリック** します。*Name* フィールドに `node1` を入力し、他は変更せずに *Create host* を **クリック** します。
 
-. **Create the second host.**
+. **2つ目の host を作成する。**
 +
-Navigate back to the main hosts list by clicking the **< Back to Hosts** breadcrumb link. **Repeat** the steps above to create a second host named `node2`.
+**< Back to Hosts** のパンくずリンクをクリックして hosts 一覧に戻ります。上記手順を **繰り返し**、`node2` という名前の 2 つ目の host を作成します。
 
-=== Task 3: Create a Group
+=== Task 3: Group を作成する
 
-Groups are used to organize hosts and apply variables to multiple hosts at once.
+groups は hosts の整理や、複数 host への変数適用に使います。
 
-. **Navigate to the Groups tab.**
+. **Groups タブへ移動する。**
 +
-Go back to the main `Lab-Inventory` page and **click** the **Groups** tab.
+`Lab-Inventory` のメインページに戻り、**Groups** タブを **クリック** します。
 
-. **Create a new group.**
+. **新しい group を作成する。**
 +
-**Click** the blue **Create group** button.
+青色の **Create group** ボタンを **クリック** します。
 
-. **Name the group.**
+. **group 名を設定する。**
 +
-In the *Name* field, enter `web`.
+*Name* フィールドに `web` を入力します。
 +
-NOTE: Unlike in a static inventory file, you do not need to use brackets `[]` around the group name in the UI.
+NOTE: 静的 inventory file と異なり、UI では group 名を `[]` で囲む必要はありません。
 
-. **Save the group.**
+. **group を保存する。**
 +
-**Click** the blue **Create group** button.
+青色の **Create group** ボタンを **クリック** します。
 
-=== Task 4: Add Hosts to the Group
+=== Task 4: Group に Hosts を追加する
 
-Finally, you will associate your two hosts with the new `web` group.
+最後に、作成した `web` group に 2 台の host を関連付けます。
 
-. **Navigate to the Hosts tab for the group.**
+. **group の Hosts タブへ移動する。**
 +
-Inside the `web` group you just created, **click** the **Hosts** tab.
+作成した `web` group の中で **Hosts** タブを **クリック** します。
 
-. **Add existing hosts.**
+. **既存 host を追加する。**
 +
-**Click** the blue **Add existing host** button.
+青色の **Add existing host** ボタンを **クリック** します。
 
-. **Select the hosts.**
+. **hosts を選択する。**
 +
-In the pop-up window, **select the checkbox** for both `node1` and `node2`, then **click** *Add hosts*.
+ポップアップで `node1` と `node2` の両方に **チェック** を入れ、*Add hosts* を **クリック** します。
 
-. **Verify the association.**
+. **関連付けを確認する。**
 +
-You should now see both `node1` and `node2` listed in the *Hosts* tab for the `web` group.
+`web` group の *Hosts* タブに `node1` と `node2` が表示されていれば完了です。
 
 ---
 
-== Next Steps
+== 次のステップ
 
-Press the `Check` button below to proceed to the next challenge.
+次のチャレンジに進むには、下の `Check` ボタンを押してください。
 
-== Troubleshooting
+== トラブルシューティング
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[open an issue on GitHub].
+問題が発生した場合や不具合を見つけた場合は、link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[GitHub で issue を作成してください]。

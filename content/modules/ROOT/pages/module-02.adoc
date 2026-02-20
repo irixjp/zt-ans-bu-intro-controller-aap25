@@ -1,50 +1,50 @@
-= Lab Guide: Introduction to Automation Controller
+= ラボガイド: Automation Controller 入門
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-_An introduction to the automation controller web UI, including the dashboard, inventories, projects, and job templates._
+_ダッシュボード、インベントリー、プロジェクト、ジョブテンプレートを含む automation controller Web UI の入門ガイド。_
 
 ---
 
-== Lab Briefing
+== ラボ概要
 
-This section provides an overview of the key components of the automation controller UI that you will be exploring in this lab.
+このセクションでは、このラボで操作する automation controller UI の主要コンポーネントを紹介します。
 
-=== Welcome to Ansible Automation Platform
+=== Ansible Automation Platform へようこそ
 
-In the following chapter, you will learn about the web UI dashboard and explore the **Inventory**, **Projects**, and **Job Templates** sections.
+次の章では、Web UI ダッシュボードを確認し、**Inventory**、**Projects**、**Job Templates** の各セクションを操作します。
 
-=== Automation Platform Overview
+=== Automation Platform の概要
 
-The **Overview** screen is the main dashboard. It shows a summary of your hosts, projects, and inventories, with each count being a direct link to the corresponding objects. Below the resource counts, you will find a Job Activity graph and a card-like summary of recent Jobs, Projects, and Inventories.
+**Overview** 画面はメインダッシュボードです。hosts、projects、inventories の概要が表示され、各数値は対応オブジェクトへのリンクになっています。リソース数の下には Job Activity グラフと、最近の Jobs、Projects、Inventories のカード形式サマリーが表示されます。
 
 image::Oct-16-2024_at_02.01.47-image.png[Automation controller overview dashboard, opts="border"]
 
-=== Automation Controller Jobs View
+=== Automation Controller Jobs ビュー
 
-You can access the **Jobs** view by clicking *Jobs* from the left navigation bar. This view shows all the jobs that have run, including project syncs, SCM updates, playbook runs, and more.
+左側ナビゲーションバーの *Jobs* をクリックすると **Jobs** ビューを開けます。このビューには、プロジェクト同期、SCM 更新、playbook 実行など、これまでに実行されたすべてのジョブが表示されます。
 
 image::ug-dashboard-jobs-view.png[Jobs view in automation controller, opts="border"]
 
-=== Schedules View
+=== Schedules ビュー
 
-You can access the **Schedules** view by clicking **Automation Execution** → **Schedules** in the left navigation menu. This view shows all scheduled jobs that are configured to launch on a regular basis. They can be used to launch jobs, sync inventory sources, and import project content from version control.
+左側ナビゲーションメニューの **Automation Execution** → **Schedules** をクリックすると **Schedules** ビューを開けます。このビューには、定期実行するように設定されたスケジュール済みジョブが表示されます。ジョブ起動、インベントリーソース同期、バージョン管理からのプロジェクト内容取り込みに利用できます。
 
 image::Oct-16-2024_at_02.12.32-image.png[Schedules view in automation controller, opts="border"]
 
 ---
 
-== Lab Guide: Hands-On Tasks
+== ラボガイド: ハンズオンタスク
 
-Welcome to the *Introduction to automation controller* lab. In the following challenges, you will build upon the work from the _Writing your first playbook_ lab and learn how to run your Ansible Playbooks through the web UI.
+*Introduction to automation controller* ラボへようこそ。これ以降のチャレンジでは、_Writing your first playbook_ ラボの内容を踏まえて、Web UI から Ansible Playbook を実行する方法を学びます。
 
-The new unified UI has several sections, but for this lab, we will focus on the **Automation Execution (Automation controller)** view.
+新しい統合 UI には複数のセクションがありますが、このラボでは **Automation Execution (Automation controller)** ビューに注目します。
 
 image::Oct-16-2024_at_02.36.20-image.png[Automation Execution menu highlighted, opts="border"]
 
-The screen on the left shows the login page. Please log in with the following credentials to continue.
+左側の画面はログインページです。続行するため、以下の認証情報でログインしてください。
 
 [IMPORTANT]
 ====
@@ -52,54 +52,54 @@ The screen on the left shows the login page. Please log in with the following cr
 * *Password:* `ansible123!`
 ====
 
-=== Task 1: Explore the Overview
+=== Task 1: Overview を確認する
 
-Your first task is to explore the **Overview** dashboard. The initial screen will show little information due to the lack of recent activity, but you can compare it again after you finish the lab to see the difference.
+最初のタスクでは **Overview** ダッシュボードを確認します。初期状態では最近のアクティビティが少ないため情報は少なめですが、ラボ完了後に再度確認すると違いが分かります。
 
-You will find the following sections:
+次のセクションがあります。
 
-* **Resource counts:** A summary of your *hosts*, *projects*, and *inventories*.
-* **Job activity:** A graph showing job runs from the past month.
-* **Jobs:** A list of recently run jobs.
-* **Projects:** A list of recently updated projects.
-* **Inventories:** A list of recently updated inventories.
+* **Resource counts:** *hosts*、*projects*、*inventories* のサマリー
+* **Job activity:** 過去1か月のジョブ実行を示すグラフ
+* **Jobs:** 最近実行されたジョブの一覧
+* **Projects:** 最近更新されたプロジェクトの一覧
+* **Inventories:** 最近更新されたインベントリーの一覧
 
-A new feature in Ansible Automation Platform 2.5 is a section with quick start guides and interactive how-tos, which is very useful for getting started right after an installation.
+Ansible Automation Platform 2.5 の新機能として、クイックスタートガイドとインタラクティブな how-to セクションが追加されており、インストール直後の立ち上がりに便利です。
 
 image:Oct-16-2024_at_02.29.14-image.png[Quick start guides on the dashboard, opts="border"]
 
-Feel free to click on any of the titles or "View all" links to explore the corresponding sections.
+各タイトルや "View all" リンクをクリックして、対応セクションを自由に確認してください。
 
-=== Task 2: Explore the Inventories Section
+=== Task 2: Inventories セクションを確認する
 
-An **inventory** is a collection of hosts against which playbooks can be run. It's the same concept as an inventory file you might be familiar with from the command line, but with added features and better reusability.
+**inventory** は playbook の実行対象となる hosts の集合です。コマンドラインで使う inventory file と同じ概念ですが、追加機能と再利用性があります。
 
-. **Navigate to the Inventories page.**
+. **Inventories ページへ移動する。**
 +
-Click on the **Inventories** link from the *Overview* page or from the left navigation menu under **Infrastructure** → **Inventories**.
+*Overview* ページの **Inventories** リンク、または左側ナビゲーションメニューの **Infrastructure** → **Inventories** から移動します。
 
-. **Explore the Demo Inventory.**
+. **Demo Inventory を確認する。**
 +
-Click on the **Demo Inventory** that comes pre-loaded. Explore the different tabs to familiarize yourself with the available fields. You will create your own inventory soon.
+事前に用意されている **Demo Inventory** をクリックし、利用可能なフィールドに慣れるために各タブを確認します。後続で独自の inventory を作成します。
 
-=== Task 3: Explore the Projects Section
+=== Task 3: Projects セクションを確認する
 
-A **project** is a logical grouping of Ansible Playbooks within the automation controller. These playbooks typically reside in a source code version control system like Git.
+**project** は automation controller 内での Ansible Playbook の論理的なグループです。これらの playbook は通常、Git のようなソースコード管理システムに配置されています。
 
-. **Navigate to the Projects page.**
+. **Projects ページへ移動する。**
 +
-In the left navigation menu, go to **Automation Execution** → **Projects**.
+左側ナビゲーションメニューで **Automation Execution** → **Projects** に移動します。
 
-. **Explore the Demo Project.**
+. **Demo Project を確認する。**
 +
-Click on the **Demo Project** that comes pre-loaded. Examine the different fields and tabs available.
+事前に用意されている **Demo Project** をクリックし、利用可能な各フィールドとタブを確認します。
 
 ---
 
-== Next Steps
+== 次のステップ
 
-Press the `Next` button below to proceed to the next challenge.
+次のチャレンジに進むには、下の `Next` ボタンを押してください。
 
-== Troubleshooting
+== トラブルシューティング
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+controller-101-dashboard+AAP25&assignees=leogallego[open an issue on GitHub].
+問題が発生した場合や不具合を見つけた場合は、link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+controller-101-dashboard+AAP25&assignees=leogallego[GitHub で issue を作成してください]。

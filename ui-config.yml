@@ -5,34 +5,34 @@ antora:
   dir: www
   modules:
     - name: module-01
-      label: "Workshop Tips"
+      label: "Ansible Automation Platform インタラクティブラボへようこそ"
       solveButton: false
     - name: module-02
-      label: "Exploring the web-UI and Dashboard"
+      label: "ラボガイド: Automation Controller 入門"
       solveButton: false
     - name: module-03
-      label: "Creating an Inventory"
+      label: "ラボガイド: Inventory の作成"
       solveButton: true
     - name: module-04
-      label: "Creating your first Project"
+      label: "ラボガイド: 最初の Project を作成する"
       solveButton: true
     - name: module-05
-      label: "Get to know Credentials"
+      label: "ラボガイド: Credentials を理解する"
       solveButton: true
     - name: module-06
-      label: "Creating a Job Template"
+      label: "ラボガイド: Job Template の作成"
       solveButton: true
     - name: module-07
-      label: "Creating a second Project"
+      label: "ラボガイド: 2つ目の Project を作成する"
       solveButton: true
     - name: module-08
-      label: "Creating a second and third Job Template"
+      label: "ラボガイド: 複数の Job Template を作成する"
       solveButton: true
     - name: module-09
-      label: "Creating a Workflow Job Tempalte"
+      label: "ラボガイド: Workflow Job Template の作成"
       solveButton: true
     - name: module-10
-      label: "Creating a Job Template with a Survey"
+      label: "ラボガイド: Survey 付き Job Template の作成"
       solveButton: true
 
 

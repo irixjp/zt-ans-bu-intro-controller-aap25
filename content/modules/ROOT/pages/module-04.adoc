@@ -1,50 +1,50 @@
-= Lab Guide: Creating Your First Project
+= ラボガイド: 最初の Project を作成する
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-_A guide to importing your first Ansible Playbooks into the automation controller using Projects._
+_Projects を使って最初の Ansible Playbook を automation controller に取り込むためのガイド。_
 
 ---
 
-== Lab Briefing
+== ラボ概要
 
-A **Project** is a logical collection of Ansible Playbooks. You can manage playbooks by placing them into a source code management (SCM) system supported by the automation controller, such as Git, Subversion, or even Red Hat Insights.
+**Project** は Ansible Playbook の論理的なコレクションです。playbook は、Git、Subversion、Red Hat Insights など、automation controller が対応するソースコード管理（SCM）システムで管理できます。
 
 image::projects-list-all.png[Projects list view in automation controller, opts="border"]
 
 ---
 
-== Lab Guide: Hands-On Tasks
+== ラボガイド: ハンズオンタスク
 
-A **Project** in the automation controller is a way to import one or more Ansible Playbooks (and their related roles and content) from a directory. While the automation controller doesn't allow you to create or edit playbooks through the web UI, it uses Projects to import them from a source like a Git repository.
+automation controller の **Project** は、ディレクトリから 1 つ以上の Ansible Playbook（関連する roles やコンテンツを含む）を取り込む仕組みです。automation controller の Web UI で playbook の作成や編集はできませんが、Git リポジトリーのようなソースから Projects を通じて取り込みます。
 
-In this challenge, you will create your first Project, which will import a GitHub repository containing a few simple Apache playbooks.
+このチャレンジでは、簡単な Apache playbook を含む GitHub リポジトリーを取り込む最初の Project を作成します。
 
 [IMPORTANT]
 ====
-The credentials for the automation controller are:
+automation controller の認証情報:
 
 * *Username:* `admin`
 * *Password:* `ansible123!`
 ====
 
-=== Task 1: Create the Project
+=== Task 1: Project を作成する
 
-First, you will create a new project that points to a public Git repository.
+最初に、公開 Git リポジトリーを参照する新しい project を作成します。
 
-. **Navigate to the Projects page.**
+. **Projects ページへ移動する。**
 +
-In the left navigation menu, go to **Automation Execution** → **Projects**.
+左側ナビゲーションメニューで **Automation Execution** → **Projects** に移動します。
 
-. **Create a new project.**
+. **新しい project を作成する。**
 +
-**Click** the blue **Create project** button.
+青色の **Create project** ボタンを **クリック** します。
 
-. **Enter the project details.**
+. **project の詳細を入力する。**
 +
-Fill out the form with the following information:
+フォームに以下を入力します。
 +
 * **Name:** `Apache playbooks`
 * **Organization:** `Default`
@@ -56,28 +56,28 @@ Fill out the form with the following information:
 https://github.com/ansible-tmm/instruqt-wyfp.git
 ----
 
-. **Save the project.**
+. **project を保存する。**
 +
-Leave all other fields as they are and **click** the blue **Create project** button.
+他の項目はそのままにして、青色の **Create project** ボタンを **クリック** します。
 
-=== Task 2: Verify the Project Sync
+=== Task 2: Project 同期を確認する
 
-After creating the project, the automation controller automatically initiates a sync process to download the playbooks from the Git repository.
+project を作成すると、automation controller は自動的に同期処理を開始し、Git リポジトリーから playbook を取得します。
 
-. **Check the project status.**
+. **project ステータスを確認する。**
 +
-After saving, you will be taken to the *Details* tab for the new project. **Verify** that the *Status* for your `Apache playbooks` project is green and reads **Successful**.
+保存後、新しい project の *Details* タブに移動します。`Apache playbooks` project の *Status* が緑色で **Successful** と表示されることを **確認** します。
 
-. **Review the sync output.**
+. **同期出力を確認する。**
 +
-**Click** on the **Successful** status text to review the output of the sync job. This will show you the details of the Git clone process.
+**Successful** のステータステキストを **クリック** して同期ジョブの出力を確認します。Git clone 処理の詳細が表示されます。
 
 ---
 
-== Next Steps
+== 次のステップ
 
-Press the `Check` button below to proceed to the next challenge.
+次のチャレンジに進むには、下の `Check` ボタンを押してください。
 
-== Troubleshooting
+== トラブルシューティング
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[open an issue on GitHub].
+問題が発生した場合や不具合を見つけた場合は、link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[GitHub で issue を作成してください]。

@@ -1,96 +1,96 @@
-= Lab Guide: Understanding Credentials
+= ラボガイド: Credentials を理解する
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-_A guide to checking the authentication options of automation controller by exploring the Credentials section._
+_Credentials セクションを確認し、automation controller の認証オプションを理解するためのガイド。_
 
 ---
 
-== Lab Briefing
+== ラボ概要
 
-**Credentials** are used for authentication when launching jobs against machines, synchronizing with inventory sources, and importing project content from a version control system.
+**Credentials** は、マシンに対するジョブ実行時の認証、inventory source との同期、バージョン管理システムからの project 取り込み時の認証に使用されます。
 
 image::credentials-demo-edit-details.png[Details of a machine credential, opts="border"]
 
 ---
 
-== Lab Guide: Hands-On Tasks
+== ラボガイド: ハンズオンタスク
 
-**Credentials** are utilized by Ansible Automation Platform for authentication when launching jobs against devices, syncing with inventory sources, or importing projects from version control.
+**Credentials** は Ansible Automation Platform で、デバイスへのジョブ実行、inventory source 同期、バージョン管理からの project 取り込み時の認証に利用されます。
 
-Credentials are imported and stored encrypted within the automation controller and are not retrievable in plain text by any user. You can grant users and teams the ability to use these credentials without actually exposing the sensitive information to them.
+Credentials は automation controller に暗号化して保存され、どのユーザーでも平文では取得できません。ユーザーやチームに、機密情報を開示せずに credential 利用権限を付与できます。
 
-There are over 20 supported credential types, ranging from tokens to user/passwords or SSH keys. Today, you will explore the **Machine** credential type, which is used to connect to servers via SSH.
+サポートされる credential type は 20 種類以上あり、トークン、ユーザー名/パスワード、SSH キーなどがあります。今回は、SSH でサーバー接続に使う **Machine** credential type を確認します。
 
 [WARNING]
 ====
-In this exercise, you are only observing. Please do not make any changes, as the credentials are pre-loaded for you.
+この演習では確認のみを行います。credentials は事前投入済みなので、変更はしないでください。
 ====
 
 [IMPORTANT]
 ====
-Reminder that the credentials to log in to the automation controller are:
+automation controller へのログイン認証情報:
 
 * *Username:* `admin`
 * *Password:* `ansible123!`
 ====
 
-=== Task 1: Explore the Credentials Section
+=== Task 1: Credentials セクションを確認する
 
-First, you will navigate to the Credentials section and examine a pre-loaded credential.
+最初に Credentials セクションへ移動し、事前投入済みの credential を確認します。
 
-. **Navigate to the Credentials page.**
+. **Credentials ページへ移動する。**
 +
-In the left navigation menu, go to **Automation Execution** → **Infrastructure** → **Credentials**.
+左側ナビゲーションメニューで **Automation Execution** → **Infrastructure** → **Credentials** に移動します。
 
-. **View the list of credentials.**
+. **credentials 一覧を表示する。**
 +
-This will display a searchable list of credentials, classified by name and type.
+名前とタイプで分類された、検索可能な credentials 一覧が表示されます。
 
-. **Open the lab credential.**
+. **ラボ用 credential を開く。**
 +
-**Look** for the `lab-credentials` credential, which is a *Machine* type, and **click** on its name.
+*Machine* タイプの `lab-credentials` を **探して**、名前を **クリック** します。
 
-. **Examine the credential details.**
+. **credential の詳細を確認する。**
 +
-On the *Details* tab, notice that the *SSH Private Key* field shows **Encrypted**.
+*Details* タブで、*SSH Private Key* フィールドが **Encrypted** と表示されることを確認します。
 
-. **Check credential access.**
+. **credential のアクセス権を確認する。**
 +
-**Click** the **Team Access** and **User Access** tabs to see which automation controller users and teams have permission to use this credential.
+**Team Access** と **User Access** タブを **クリック** し、この credential を使用できる users と teams を確認します。
 
-. **Check credential usage.**
+. **credential の使用状況を確認する。**
 +
-**Click** the **Job Templates** tab. This tab shows which jobs are currently using this credential. It should be empty right now.
+**Job Templates** タブを **クリック** します。このタブには、この credential を利用中のジョブが表示されます。現時点では空のはずです。
 
-=== Task 2: Examine a Machine Credential
+=== Task 2: Machine Credential を確認する
 
-Next, you will enter the edit view for the credential to see the available fields.
+次に credential の編集画面に入り、利用可能なフィールドを確認します。
 
-. **Enter the credential edit view.**
+. **credential の編集画面を開く。**
 +
-Go back to the *Details* tab for `lab-credentials` and **click** the **Edit credential** button.
+`lab-credentials` の *Details* タブに戻り、**Edit credential** ボタンを **クリック** します。
 
-. **Observe the available fields.**
+. **利用可能なフィールドを確認する。**
 +
-Look at the different configuration options available for a Machine credential, but *do not edit or change anything*.
+Machine credential で利用できる設定項目を確認しますが、*何も編集・変更しないでください*。
 
-. **Note the encrypted key.**
+. **暗号化キーを確認する。**
 +
-Notice that the *SSH Private Key* field only allows you to **Reset** the value. As mentioned before, the key is encrypted and not retrievable from the UI after it has been saved.
+*SSH Private Key* フィールドは値の **Reset** のみ可能です。前述の通り、キーは暗号化されるため、一度保存すると UI からは取得できません。
 
-. **Exit the edit view.**
+. **編集画面を閉じる。**
 +
-**Click** the **Cancel** button to exit without making any accidental modifications.
+誤操作を避けるため、**Cancel** ボタンを **クリック** して終了します。
 
 ---
 
-== Next Steps
+== 次のステップ
 
-Press the `Check` button below to proceed to the next challenge.
+次のチャレンジに進むには、下の `Check` ボタンを押してください。
 
-== Troubleshooting
+== トラブルシューティング
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[open an issue on GitHub].
+問題が発生した場合や不具合を見つけた場合は、link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[GitHub で issue を作成してください]。

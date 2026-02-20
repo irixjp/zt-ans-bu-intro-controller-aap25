@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ラボガイド: Automation Controller 入門 :: Introduction to Ansible Automation Controller 2.5</title>
-    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/modules/module-02.html">
-    <link rel="prev" href="module-01.html">
-    <link rel="next" href="module-03.html">
+    <title>ラボガイド: 最初の Project を作成する :: Introduction to Ansible Automation Controller 2.5</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/modules/module-04.html">
+    <link rel="prev" href="module-03.html">
+    <link rel="next" href="module-05.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -46,13 +46,13 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="module-01.html">Ansible Automation Platform インタラクティブラボへようこそ</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="module-02.html">ラボガイド: Automation Controller 入門</a>
   </li>
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="module-03.html">ラボガイド: Inventory の作成</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="module-04.html">ラボガイド: 最初の Project を作成する</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,17 +101,17 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">演習</a></li>
-    <li><a href="module-02.html">ラボガイド: Automation Controller 入門</a></li>
+    <li><a href="module-04.html">ラボガイド: 最初の Project を作成する</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">ラボガイド: Automation Controller 入門</h1>
+<h1 class="page">ラボガイド: 最初の Project を作成する</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>ダッシュボード、インベントリー、プロジェクト、ジョブテンプレートを含む automation controller Web UI の入門ガイド。</em></p>
+<p><em>Projects を使って最初の Ansible Playbook を automation controller に取り込むためのガイド。</em></p>
 </div>
 <hr>
 </div>
@@ -120,66 +120,24 @@
 <h2 id="_ラボ概要"><a class="anchor" href="#_ラボ概要"></a>ラボ概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このセクションでは、このラボで操作する automation controller UI の主要コンポーネントを紹介します。</p>
-</div>
-<div class="sect2">
-<h3 id="_ansible_automation_platform_へようこそ"><a class="anchor" href="#_ansible_automation_platform_へようこそ"></a>Ansible Automation Platform へようこそ</h3>
-<div class="paragraph">
-<p>次の章では、Web UI ダッシュボードを確認し、<strong>Inventory</strong>、<strong>Projects</strong>、<strong>Job Templates</strong> の各セクションを操作します。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_automation_platform_の概要"><a class="anchor" href="#_automation_platform_の概要"></a>Automation Platform の概要</h3>
-<div class="paragraph">
-<p><strong>Overview</strong> 画面はメインダッシュボードです。hosts、projects、inventories の概要が表示され、各数値は対応オブジェクトへのリンクになっています。リソース数の下には Job Activity グラフと、最近の Jobs、Projects、Inventories のカード形式サマリーが表示されます。</p>
+<p><strong>Project</strong> は Ansible Playbook の論理的なコレクションです。playbook は、Git、Subversion、Red Hat Insights など、automation controller が対応するソースコード管理（SCM）システムで管理できます。</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/Oct-16-2024_at_02.01.47-image.png" alt="Automation controller overview dashboard">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_automation_controller_jobs_ビュー"><a class="anchor" href="#_automation_controller_jobs_ビュー"></a>Automation Controller Jobs ビュー</h3>
-<div class="paragraph">
-<p>左側ナビゲーションバーの <strong>Jobs</strong> をクリックすると <strong>Jobs</strong> ビューを開けます。このビューには、プロジェクト同期、SCM 更新、playbook 実行など、これまでに実行されたすべてのジョブが表示されます。</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/ug-dashboard-jobs-view.png" alt="Jobs view in automation controller">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_schedules_ビュー"><a class="anchor" href="#_schedules_ビュー"></a>Schedules ビュー</h3>
-<div class="paragraph">
-<p>左側ナビゲーションメニューの <strong>Automation Execution</strong> → <strong>Schedules</strong> をクリックすると <strong>Schedules</strong> ビューを開けます。このビューには、定期実行するように設定されたスケジュール済みジョブが表示されます。ジョブ起動、インベントリーソース同期、バージョン管理からのプロジェクト内容取り込みに利用できます。</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/Oct-16-2024_at_02.12.32-image.png" alt="Schedules view in automation controller">
+<img src="_images/projects-list-all.png" alt="Projects list view in automation controller">
 </div>
 </div>
 <hr>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_ラボガイド_ハンズオンタスク"><a class="anchor" href="#_ラボガイド_ハンズオンタスク"></a>ラボガイド: ハンズオンタスク</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Introduction to automation controller</strong> ラボへようこそ。これ以降のチャレンジでは、<em>Writing your first playbook</em> ラボの内容を踏まえて、Web UI から Ansible Playbook を実行する方法を学びます。</p>
+<p>automation controller の <strong>Project</strong> は、ディレクトリから 1 つ以上の Ansible Playbook（関連する roles やコンテンツを含む）を取り込む仕組みです。automation controller の Web UI で playbook の作成や編集はできませんが、Git リポジトリーのようなソースから Projects を通じて取り込みます。</p>
 </div>
 <div class="paragraph">
-<p>新しい統合 UI には複数のセクションがありますが、このラボでは <strong>Automation Execution (Automation controller)</strong> ビューに注目します。</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/Oct-16-2024_at_02.36.20-image.png" alt="Automation Execution menu highlighted">
-</div>
-</div>
-<div class="paragraph">
-<p>左側の画面はログインページです。続行するため、以下の認証情報でログインしてください。</p>
+<p>このチャレンジでは、簡単な Apache playbook を含む GitHub リポジトリーを取り込む最初の Project を作成します。</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -188,6 +146,9 @@
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
+<div class="paragraph">
+<p>automation controller の認証情報:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -203,68 +164,9 @@
 </table>
 </div>
 <div class="sect2">
-<h3 id="_task_1_overview_を確認する"><a class="anchor" href="#_task_1_overview_を確認する"></a>Task 1: Overview を確認する</h3>
+<h3 id="_task_1_project_を作成する"><a class="anchor" href="#_task_1_project_を作成する"></a>Task 1: Project を作成する</h3>
 <div class="paragraph">
-<p>最初のタスクでは <strong>Overview</strong> ダッシュボードを確認します。初期状態では最近のアクティビティが少ないため情報は少なめですが、ラボ完了後に再度確認すると違いが分かります。</p>
-</div>
-<div class="paragraph">
-<p>次のセクションがあります。</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Resource counts:</strong> <strong>hosts</strong>、<strong>projects</strong>、<strong>inventories</strong> のサマリー</p>
-</li>
-<li>
-<p><strong>Job activity:</strong> 過去1か月のジョブ実行を示すグラフ</p>
-</li>
-<li>
-<p><strong>Jobs:</strong> 最近実行されたジョブの一覧</p>
-</li>
-<li>
-<p><strong>Projects:</strong> 最近更新されたプロジェクトの一覧</p>
-</li>
-<li>
-<p><strong>Inventories:</strong> 最近更新されたインベントリーの一覧</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Ansible Automation Platform 2.5 の新機能として、クイックスタートガイドとインタラクティブな how-to セクションが追加されており、インストール直後の立ち上がりに便利です。</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/Oct-16-2024_at_02.29.14-image.png" alt="Quick start guides on the dashboard"></span></p>
-</div>
-<div class="paragraph">
-<p>各タイトルや "View all" リンクをクリックして、対応セクションを自由に確認してください。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_task_2_inventories_セクションを確認する"><a class="anchor" href="#_task_2_inventories_セクションを確認する"></a>Task 2: Inventories セクションを確認する</h3>
-<div class="paragraph">
-<p><strong>inventory</strong> は playbook の実行対象となる hosts の集合です。コマンドラインで使う inventory file と同じ概念ですが、追加機能と再利用性があります。</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Inventories ページへ移動する。</strong></p>
-<div class="paragraph">
-<p><strong>Overview</strong> ページの <strong>Inventories</strong> リンク、または左側ナビゲーションメニューの <strong>Infrastructure</strong> → <strong>Inventories</strong> から移動します。</p>
-</div>
-</li>
-<li>
-<p><strong>Demo Inventory を確認する。</strong></p>
-<div class="paragraph">
-<p>事前に用意されている <strong>Demo Inventory</strong> をクリックし、利用可能なフィールドに慣れるために各タブを確認します。後続で独自の inventory を作成します。</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_task_3_projects_セクションを確認する"><a class="anchor" href="#_task_3_projects_セクションを確認する"></a>Task 3: Projects セクションを確認する</h3>
-<div class="paragraph">
-<p><strong>project</strong> は automation controller 内での Ansible Playbook の論理的なグループです。これらの playbook は通常、Git のようなソースコード管理システムに配置されています。</p>
+<p>最初に、公開 Git リポジトリーを参照する新しい project を作成します。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -275,9 +177,64 @@
 </div>
 </li>
 <li>
-<p><strong>Demo Project を確認する。</strong></p>
+<p><strong>新しい project を作成する。</strong></p>
 <div class="paragraph">
-<p>事前に用意されている <strong>Demo Project</strong> をクリックし、利用可能な各フィールドとタブを確認します。</p>
+<p>青色の <strong>Create project</strong> ボタンを <strong>クリック</strong> します。</p>
+</div>
+</li>
+<li>
+<p><strong>project の詳細を入力する。</strong></p>
+<div class="paragraph">
+<p>フォームに以下を入力します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Name:</strong> <code>Apache playbooks</code></p>
+</li>
+<li>
+<p><strong>Organization:</strong> <code>Default</code></p>
+</li>
+<li>
+<p><strong>Source Control Type:</strong> <code>Git</code></p>
+</li>
+<li>
+<p><strong>Source Control URL:</strong></p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-text hljs" data-lang="text">https://github.com/ansible-tmm/instruqt-wyfp.git</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>project を保存する。</strong></p>
+<div class="paragraph">
+<p>他の項目はそのままにして、青色の <strong>Create project</strong> ボタンを <strong>クリック</strong> します。</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_task_2_project_同期を確認する"><a class="anchor" href="#_task_2_project_同期を確認する"></a>Task 2: Project 同期を確認する</h3>
+<div class="paragraph">
+<p>project を作成すると、automation controller は自動的に同期処理を開始し、Git リポジトリーから playbook を取得します。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>project ステータスを確認する。</strong></p>
+<div class="paragraph">
+<p>保存後、新しい project の <strong>Details</strong> タブに移動します。<code>Apache playbooks</code> project の <strong>Status</strong> が緑色で <strong>Successful</strong> と表示されることを <strong>確認</strong> します。</p>
+</div>
+</li>
+<li>
+<p><strong>同期出力を確認する。</strong></p>
+<div class="paragraph">
+<p><strong>Successful</strong> のステータステキストを <strong>クリック</strong> して同期ジョブの出力を確認します。Git clone 処理の詳細が表示されます。</p>
 </div>
 </li>
 </ol>
@@ -290,7 +247,7 @@
 <h2 id="_次のステップ"><a class="anchor" href="#_次のステップ"></a>次のステップ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>次のチャレンジに進むには、下の <code>Next</code> ボタンを押してください。</p>
+<p>次のチャレンジに進むには、下の <code>Check</code> ボタンを押してください。</p>
 </div>
 </div>
 </div>
@@ -298,13 +255,13 @@
 <h2 id="_トラブルシューティング"><a class="anchor" href="#_トラブルシューティング"></a>トラブルシューティング</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>問題が発生した場合や不具合を見つけた場合は、<a href="https://github.com/ansible/workshops/issues/new?labels=controller-101&amp;title=Issue+with+controller-101-dashboard+AAP25&amp;assignees=leogallego">GitHub で issue を作成してください</a>。</p>
+<p>問題が発生した場合や不具合を見つけた場合は、<a href="https://github.com/ansible/workshops/issues/new?labels=controller-101&amp;title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&amp;assignees=leogallego">GitHub で issue を作成してください</a>。</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="module-01.html" class="query-params-link">Ansible Automation Platform インタラクティブラボへようこそ</a></span>
-  <span class="next"><a href="module-03.html" class="query-params-link">ラボガイド: Inventory の作成</a></span>
+  <span class="prev"><a href="module-03.html" class="query-params-link">ラボガイド: Inventory の作成</a></span>
+  <span class="next"><a href="module-05.html" class="query-params-link">ラボガイド: Credentials を理解する</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

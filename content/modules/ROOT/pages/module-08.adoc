@@ -1,144 +1,142 @@
-= Lab Guide: Creating Multiple Job Templates
+= ラボガイド: 複数の Job Template を作成する
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-_A guide to creating a second and third Job Template to run different playbooks from your projects._
+_プロジェクト内の異なる playbook を実行するために、2つ目と3つ目の Job Template を作成するガイド。_
 
 ---
 
-== Lab Briefing
+== ラボ概要
 
-In the automation controller, **job templates** are a visual representation of the `ansible-playbook` command and all the flags you can use when executing from the command line. They are the primary mechanism for running your Ansible Playbooks.
+automation controller では、**job templates** は `ansible-playbook` コマンドと、CLI 実行時に使える各種フラグを視覚化したものです。Ansible Playbook を実行する主要な仕組みです。
 
 image::job-templates-home-with-example-job-template.png[Job Templates list view in automation controller, opts="border"]
 
 ---
 
-== Lab Guide: Hands-On Tasks
+== ラボガイド: ハンズオンタスク
 
-Let's use what you learned previously to create a second and third **Job Template**.
+これまでに学んだ内容を使って、2 つ目と 3 つ目の **Job Template** を作成します。
 
-* Your second Job Template, `Extended services`, will use the `extended_services.yml` playbook to deploy a PostgreSQL database to `node3`.
-* Your third Job Template, `Set motd`, will use the `motd_facts.yml` playbook to set a message of the day on `node1`.
+* 2 つ目の Job Template `Extended services` では、`extended_services.yml` playbook を使って `node3` に PostgreSQL データベースをデプロイします。
+* 3 つ目の Job Template `Set motd` では、`motd_facts.yml` playbook を使って `node1` に message of the day を設定します。
 
-NOTE: This exercise demonstrates how you can use different playbooks from the same Project in multiple Job Templates.
+NOTE: この演習では、同じ Project 内の異なる playbook を複数 Job Template で使い分ける方法を示します。
 
 [IMPORTANT]
 ====
-Reminder that the credentials to log in to the automation controller are:
+automation controller へのログイン認証情報:
 
 * *Username:* `admin`
 * *Password:* `ansible123!`
 ====
 
-=== Task 1: Create the "Extended Services" Job Template
+=== Task 1: "Extended Services" Job Template を作成する
 
-First, you will create the job template to deploy the database.
+最初に、データベースをデプロイする job template を作成します。
 
-. **Navigate to the Templates page.**
+. **Templates ページへ移動する。**
 +
-In the left navigation menu, go to **Automation Execution** → **Templates**.
+左側ナビゲーションメニューで **Automation Execution** → **Templates** に移動します。
 
-. **Create a new job template.**
+. **新しい job template を作成する。**
 +
-**Click** the blue **Create template** button and select **Create job template**.
+青色の **Create template** ボタンを **クリック** し、**Create job template** を選択します。
 
-. **Enter the job template details.**
+. **job template の詳細を入力する。**
 +
-Fill out the form with the following information:
+フォームに以下を入力します。
 +
 * **Name:** `Extended services`
 * **Job Type:** `Run`
 * **Inventory:** `Lab-Inventory`
-* **Project:** `Additional playbooks`martins0611== Troubleshooting
-
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[open an issue on GitHub].
+* **Project:** `Additional playbooks`
 * **Playbook:** `extended_services.yml`
-* **Credentials:** Select `lab-credentials`.
-* **Privilege Escalation:** **Check** this box to enable `become`.
+* **Credentials:** `lab-credentials` を選択
+* **Privilege Escalation:** `become` を有効にするため **チェック**
 
-. **Save the job template.**
+. **job template を保存する。**
 +
-Leave all other fields as they are and **click** the blue **Create job template** button.
+他の項目はそのままにして、青色の **Create job template** ボタンを **クリック** します。
 
 [IMPORTANT]
 ====
-Remember to set the **Credentials** field. It's not a mandatory field in the UI, but if you don't select the correct machine credentials, the job will fail.
+**Credentials** フィールドは UI 上で必須ではありませんが、正しい machine credentials を選択しないとジョブは失敗します。
 ====
 
-=== Task 2: Launch the "Extended Services" Job Template
+=== Task 2: "Extended Services" Job Template を起動する
 
-Now, launch the template and troubleshoot the expected failure.
+次に template を起動し、想定される失敗をトラブルシュートします。
 
-. **Launch the template.**
+. **template を起動する。**
 +
-Navigate to the **Templates** page and **click** the **Launch** icon (🚀) next to the `Extended services` job template.
+**Templates** ページに移動し、`Extended services` job template の横にある **Launch** アイコン（🚀）を **クリック** します。
 
-. **Observe and resolve the failure.**
+. **失敗を確認して解消する。**
 +
-The job execution will **fail**. Read the output message to understand why. The playbook is trying to run on a host named `node3` in a group named `[database]`, but neither of these exist in your `Lab-Inventory`.
+ジョブ実行は **失敗** します。出力メッセージを読み、理由を確認してください。playbook は `[database]` group 内の `node3` という host を対象にしていますが、`Lab-Inventory` にどちらも存在しません。
 
-. **Update the inventory.**
+. **inventory を更新する。**
 +
-Using what you learned in the inventory challenge, go back to your `Lab-Inventory` and perform the following actions:
+inventory チャレンジで学んだ内容を使って `Lab-Inventory` に戻り、次を実施します。
 +
 --
-* **Create** a new host named `node3`.
-* **Create** a new group named `database`.
-* **Add** the `node3` host to the `database` group.
+* `node3` という新しい host を **作成**
+* `database` という新しい group を **作成**
+* `database` group に `node3` host を **追加**
 --
 
-. **Relaunch the job.**
+. **ジョブを再起動する。**
 +
-**Launch** the `Extended services` job template again and verify that it now succeeds.
+`Extended services` job template を再度 **Launch** し、今度は成功することを確認します。
 
-=== Task 3: Create the "Set motd" Job Template
+=== Task 3: "Set motd" Job Template を作成する
 
-Now, apply what you've learned to create the third job template.
+次に、学んだ内容を使って 3 つ目の job template を作成します。
 
-. **Navigate to the Templates page.**
+. **Templates ページへ移動する。**
 +
-Go to **Automation Execution** → **Templates**.
+**Automation Execution** → **Templates** に移動します。
 
-. **Create a new job template.**
+. **新しい job template を作成する。**
 +
-**Click** the **Create template** button and select **Create job template**.
+**Create template** ボタンを **クリック** し、**Create job template** を選択します。
 
-. **Enter the job template details.**
+. **job template の詳細を入力する。**
 +
-Fill out the form with the following information:
+フォームに以下を入力します。
 +
 * **Name:** `Set motd`
 * **Inventory:** `Lab-Inventory`
 * **Project:** `Additional playbooks`
 * **Playbook:** `motd_facts.yml`
-* **Credentials:** Select `lab-credentials`.
-* **Privilege Escalation:** **Check** this box.
+* **Credentials:** `lab-credentials` を選択
+* **Privilege Escalation:** このボックスを **チェック**
 
-. **Save the job template.**
+. **job template を保存する。**
 +
-**Click** the blue **Create job template** button.
+青色の **Create job template** ボタンを **クリック** します。
 
-=== Task 4: Launch the "Set motd" Job Template
+=== Task 4: "Set motd" Job Template を起動する
 
-Finally, launch the new template to set the message of the day.
+最後に、新しい template を起動して message of the day を設定します。
 
-. **Launch the template.**
+. **template を起動する。**
 +
-From the **Templates** list, **click** the **Launch** icon (🚀) next to the `Set motd` job template.
+**Templates** 一覧で、`Set motd` job template の横にある **Launch** アイコン（🚀）を **クリック** します。
 
-. **Verify the execution was successful.**
+. **実行成功を確認する。**
 +
-The job should complete with a **Successful** status.
+ジョブが **Successful** ステータスで完了すれば成功です。
 
 ---
 
-== Next Steps
+== 次のステップ
 
-Press the `Check` button below to proceed to the next challenge.
+次のチャレンジに進むには、下の `Check` ボタンを押してください。
 
-== Troubleshooting
+== トラブルシューティング
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/instruqt/issues/new?labels=controller-101&title=controller-101+slug+ID:+controller-101-template-extended&assignees=leogallego[open an issue on GitHub].
+問題が発生した場合や不具合を見つけた場合は、link:https://github.com/ansible/instruqt/issues/new?labels=controller-101&title=controller-101+slug+ID:+controller-101-template-extended&assignees=leogallego[GitHub で issue を作成してください]。

@@ -1,90 +1,90 @@
-= Lab Guide: Creating a Second Project
+= ラボガイド: 2つ目の Project を作成する
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-_A guide to importing a second repository into a new project in the automation controller._
+_automation controller で新しい project に 2 つ目のリポジトリーを取り込むためのガイド。_
 
 ---
 
-== Lab Briefing
+== ラボ概要
 
-A **Project** is a logical collection of Ansible Playbooks. You can manage playbooks by placing them into a source code management (SCM) system supported by the automation controller, such as Git, Subversion, or even Red Hat Insights.
+**Project** は Ansible Playbook の論理的なコレクションです。playbook は、Git、Subversion、Red Hat Insights など、automation controller が対応するソースコード管理（SCM）システムで管理できます。
 
 image::projects-list-all.png[Projects list view in automation controller, opts="border"]
 
 ---
 
-== Lab Guide: Hands-On Tasks
+== ラボガイド: ハンズオンタスク
 
-You already have a Project named `Apache playbooks` from a previous challenge. In this new challenge, you will create a second project named `Additional playbooks` which will import playbooks to install other services (`extended_services.yml`), set a message of the day (`motd_facts.yml`), and create multiple users (`loop_users.yml`).
+前のチャレンジで `Apache playbooks` という Project を作成済みです。このチャレンジでは、`Additional playbooks` という 2 つ目の project を作成し、別サービスをインストールする playbook（`extended_services.yml`）、メッセージを設定する playbook（`motd_facts.yml`）、複数ユーザーを作成する playbook（`loop_users.yml`）を取り込みます。
 
 [IMPORTANT]
 ====
-Reminder that the credentials to log in to the automation controller are:
+automation controller へのログイン認証情報:
 
 * *Username:* `admin`
 * *Password:* `ansible123!`
 ====
 
-=== Task 1: Create the Second Project
+=== Task 1: 2つ目の Project を作成する
 
-First, you will create another new project that points to a different public Git repository.
+最初に、別の公開 Git リポジトリーを参照する新しい project を作成します。
 
-. **Navigate to the Projects page.**
+. **Projects ページへ移動する。**
 +
-In the left navigation menu, go to **Automation Execution** → **Projects**.
+左側ナビゲーションメニューで **Automation Execution** → **Projects** に移動します。
 
-. **Create a new project.**
+. **新しい project を作成する。**
 +
-**Click** the blue **Create project** button.
+青色の **Create project** ボタンを **クリック** します。
 
-. **Enter the project details.**
+. **project の詳細を入力する。**
 +
-Fill out the form with the following information:
+フォームに以下を入力します。
 +
 * **Name:** `Additional playbooks`
 * **Organization:** `Default`
 * **Source Control Type:** `Git`
-* **Source Control URL:**martins0611
+* **Source Control URL:**
 +
 [source,text]
 ----
 https://github.com/ansible-tmm/instruqt-wyfp-additional.git
 ----
 
-. **Save the project.**
+. **project を保存する。**
 +
-Leave all other fields as they are and **click** the blue **Create project** button.
+他の項目はそのままにして、青色の **Create project** ボタンを **クリック** します。
 
-=== Task 2: Verify the Project Sync
+=== Task 2: Project 同期を確認する
 
-After creating the project, the automation controller automatically initiates a sync process to download the playbooks from the Git repository.
+project を作成すると、automation controller は自動的に同期処理を開始し、Git リポジトリーから playbook を取得します。
 
-. **Check the project status.**
+. **project ステータスを確認する。**
 +
-After saving, you will be taken to the *Details* page for the new project. The *Last Job Status* should initially display **Running** in blue.
+保存後、新しい project の *Details* ページに移動します。*Last Job Status* は最初、青色の **Running** と表示されます。
 
-. **Verify the sync was successful.**
+. **同期成功を確認する。**
 +
-After a few seconds, the status should change to **Successful** and turn green. This indicates the project has synced correctly.
+数秒後にステータスが **Successful** に変わり、緑色になります。これは project が正しく同期されたことを示します。
 
-. **(Alternative) View status from the Projects list.**
+. **（別方法）Projects 一覧でステータスを確認する。**
 +
-You can also verify the status by navigating back to the main **Projects** page (**Automation Execution** → **Projects**).
+**Projects** メインページ（**Automation Execution** → **Projects**）に戻って確認することもできます。
 +
 --
-a. **Check** that the *Status* column for `Additional playbooks` is green and reads **Successful**.
-b. **Click** on the **Successful** status text to review the output of the sync job.
+a. `Additional playbooks` の *Status* 列が緑色で **Successful** と表示されることを **確認** します。
+b. **Successful** ステータステキストを **クリック** して同期ジョブ出力を確認します。
 --
 
 ---
 
-== Next Steps
+== 次のステップ
 
-Press the `Check` button below to proceed to the next challenge.
+次のチャレンジに進むには、下の `Check` ボタンを押してください。
 
-== Troubleshooting
+== トラブルシューティング
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[open an issue on GitHub].
+問題が発生した場合や不具合を見つけた場合は、link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[GitHub で issue を作成してください]。

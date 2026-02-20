@@ -1,45 +1,45 @@
-= Welcome to Ansible Automation Platform Interactive Labs
+= Ansible Automation Platform インタラクティブラボへようこそ
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-Welcome! In this lab, we will explore the web-based user interface (web UI) of the Ansible Automation Platform's **automation controller**.
+ようこそ！このラボでは、Ansible Automation Platform の **automation controller** のWebベースユーザーインターフェース（Web UI）を学びます。
 
-Through hands-on exercises, we will demonstrate how easy it is to use the web UI to manage and run your Ansible Playbooks. You will start by exploring the interface, creating an **Inventory** to manage servers, importing playbooks into **Projects**, adding **Job Templates** to run those playbooks, and finally, creating a **Workflow** to link them together.
+ハンズオン演習を通して、Web UI を使って Ansible Playbook を管理・実行する手順を確認します。最初に画面を確認し、サーバー管理用の **Inventory** を作成し、Playbook を **Projects** に取り込み、それらを実行する **Job Templates** を追加し、最後にそれらを連携する **Workflow** を作成します。
 
 ---
 
-== Automation Platform Overview
+== Automation Platform の概要
 
-The **Overview** screen is the main dashboard of the automation controller. It shows a summary of your hosts, projects, and inventories, with each count being a direct link to the corresponding objects for easy access. Below the resource counts, you will find a Job Activity graph and a card-like summary of recent Jobs, Projects, and Inventories.
+**Overview** 画面は automation controller のメインダッシュボードです。hosts、projects、inventories の概要が表示され、各数値は対応オブジェクトへのリンクになっています。リソース数の下には Job Activity のグラフと、最近の Jobs、Projects、Inventories のカード形式サマリーが表示されます。
 
-We will go through all of these sections in the upcoming challenges.
+これらのセクションは、これ以降のチャレンジで順に確認していきます。
 
 image::Oct-16-2024_at_02.01.47-image.png[Automation controller overview dashboard, opts="border"]
 
 ---
 
-== Laboratory Tips
+== ラボのヒント
 
-Before we begin, here are some basic tips to improve your lab experience:
+開始前に、ラボ体験をより良くするための基本的なヒントを確認してください。
 
-. The **instructions sidebar** (where you are reading this) can be resized by dragging its border or can be completely collapsed by clicking the "Hide instructions" button at the top. This is useful if you need extra space for the main panel.
+. **instructions サイドバー**（この文章を読んでいる場所）は、境界線をドラッグしてサイズ変更できます。上部の "Hide instructions" ボタンを押すと完全に折りたたむこともできます。メインパネルを広く使いたいときに便利です。
 +
 image:image.png[Collapsing and expanding the instructions sidebar, opts="border"]
 
-. When you finish a challenge, you must click the green **Check** (or **Next**) button at the bottom of the instructions to proceed.
+. チャレンジが終わったら、次に進むために instructions 下部の緑色の **Check**（または **Next**）ボタンをクリックしてください。
 
-. You have the option to **Skip** a challenge. Keep in mind this will auto-complete the exercises for that section.
+. **Skip** でチャレンジをスキップすることもできます。この場合、そのセクションの演習は自動完了になります。
 
-. The lab has a **55-minute limit** that can be extended. If you need more time, make sure to accept the pop-up when it appears.
+. ラボには **55分の制限時間** がありますが、延長可能です。時間が必要な場合は、表示されるポップアップを必ず承認してください。
 
-. You will find the credentials to log into the automation controller in the next challenge.
+. automation controller へのログイン情報は次のチャレンジで確認できます。
 
-. To begin the exercises, click the green button labeled **Next** below.
+. 演習を始めるには、下の緑色の **Next** ボタンをクリックしてください。
 
 ---
 
-== Troubleshooting
+== トラブルシューティング
 
-If you encounter an issue, please notify the lab facilitator for assistance.
+問題が発生した場合は、ラボ担当者に連絡してください。

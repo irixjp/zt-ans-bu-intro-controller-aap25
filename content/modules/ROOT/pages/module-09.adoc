@@ -1,102 +1,102 @@
-= Lab Guide: Creating a Workflow Job Template
+= ラボガイド: Workflow Job Template の作成
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-_A guide to connecting all the dots by linking multiple playbooks with conditional logic in a workflow._
+_複数 playbook を条件分岐付きの workflow でつなぎ、全体を連携させるためのガイド。_
 
 ---
 
-== Lab Briefing
+== ラボ概要
 
-A **workflow job template** links together different resources in a graphical way. This can include multiple job templates (playbooks), project syncs, and even other workflows, allowing you to build complex, multi-step automation processes.
+**workflow job template** は、複数のリソースをグラフィカルに連携する仕組みです。複数の job templates（playbooks）、project sync、さらには他の workflows も含められ、複雑な多段オートメーションを構築できます。
 
 image::wf-templates-home-with-example-wf-template.png[Workflow Job Templates list view, opts="border"]
 
 ---
 
-== Lab Guide: Hands-On Tasks
+== ラボガイド: ハンズオンタスク
 
-A **Workflow Job Template** is a series of connected automation tasks that are executed in a specific order. While a standard Job Template handles a single playbook, a Workflow Job Template is designed for more complex scenarios involving multiple playbooks and decision-making processes.
+**Workflow Job Template** は、特定の順序で実行される連結済みオートメーションタスクの集合です。通常の Job Template は単一 playbook を扱いますが、Workflow Job Template は複数 playbook と判断処理を含む、より複雑なシナリオ向けです。
 
-Workflows can orchestrate various node types, including:
+workflow では、次のようなノードタイプをオーケストレーションできます。
 
 * Job templates
-* Other workflow job templates
+* 他の workflow job templates
 * Project syncs
 * Inventory source syncs
 
 [WARNING]
 ====
-Remember not to confuse a **Job Template**, a **Jinja template**, and a **Workflow Job Template**. They are three separate concepts.
+**Job Template**、**Jinja template**、**Workflow Job Template** を混同しないでください。これらは別々の概念です。
 ====
 
 [IMPORTANT]
 ====
-Reminder that the credentials to log in to the automation controller are:
+automation controller へのログイン認証情報:
 
 * *Username:* `admin`
 * *Password:* `ansible123!`
 ====
 
-=== Task 1: Create a Workflow Template
+=== Task 1: Workflow Template を作成する
 
-First, you will create the main workflow that will contain your job templates.
+最初に、job templates を含めるメイン workflow を作成します。
 
-. **Navigate to the Templates page.**
+. **Templates ページへ移動する。**
 +
-In the left navigation menu, go to **Automation Execution** → **Templates**.
+左側ナビゲーションメニューで **Automation Execution** → **Templates** に移動します。
 
-. **Create a new workflow job template.**
+. **新しい workflow job template を作成する。**
 +
-**Click** the blue **Create template** button and select **Create workflow job template**.
+青色の **Create template** ボタンを **クリック** し、**Create workflow job template** を選択します。
 
-. **Enter the workflow details.**
+. **workflow の詳細を入力する。**
 +
-Fill out the form with the following information:
+フォームに以下を入力します。
 +
 * **Name:** `Your first workflow`
 * **Description:** `Create a Workflow from previous Job Templates`
 * **Organization:** `Default`
 * **Inventory:** `Lab-Inventory`
 
-. **Save the workflow.**
+. **workflow を保存する。**
 +
-Leave all other fields as they are and **click** the blue **Create workflow job template** button.
+他の項目はそのままにして、青色の **Create workflow job template** ボタンを **クリック** します。
 
-=== Task 2: Add the First Step in the Workflow Visualizer
+=== Task 2: Workflow Visualizer で最初のステップを追加する
 
-After saving, you will be taken to the Workflow Visualizer, where you can build your workflow graphically.
+保存後、Workflow Visualizer に移動し、workflow をグラフィカルに構築します。
 
-. **Add the first step.**
+. **最初のステップを追加する。**
 +
-**Click** the **Start** button to add the first node.
+最初のノードを追加するため、**Start** ボタンを **クリック** します。
 
-. **Configure the first node.**
+. **最初のノードを設定する。**
 +
-In the *Add step* side panel that appears, configure the node as follows:
+表示された *Add step* サイドパネルで、以下のように設定します。
 +
 * **Node Type:** `Job Template` (default)
 * **Job Template:** `Install Apache`
 * **Convergence:** `Any`
-* **Node alias:** `apache101` (This is a simple label for the node in the visualizer)
+* **Node alias:** `apache101`（Visualizer 上で識別するためのラベル）
 
-. **Save the node.**
+. **ノードを保存する。**
 +
-**Click** **Next**, review the details, and then **click** **Finish**.
+**Next** を **クリック** し、内容確認後に **Finish** を **クリック** します。
 
-=== Task 3: Add a Conditional Step
+=== Task 3: 条件付きステップを追加する
 
-Next, you will add a second step that runs only if the first step is successful.
+次に、最初のステップが成功した場合のみ実行される 2 つ目のステップを追加します。
 
-. **Add a new linked step.**
+. **新しい連結ステップを追加する。**
 +
-**Hover** over the `apache101` node, **click** the **+** icon, and select **Add node**.
+`apache101` ノードに **マウスオーバー** し、**+** アイコンを **クリック** して **Add node** を選択します。
 
-. **Configure the second node.**
+. **2 つ目のノードを設定する。**
 +
-In the side panel, configure the new node as follows:
+サイドパネルで以下を設定します。
 +
 * **Node Type:** `Job Template` (default)
 * **Job Template:** `Extended services`
@@ -104,19 +104,19 @@ In the side panel, configure the new node as follows:
 * **Convergence:** `Any`
 * **Node alias:** `extended201`
 
-. **Save the node.**
+. **ノードを保存する。**
 +
-**Click** **Next**, review the details, and then **click** **Finish**.
+**Next** を **クリック** し、内容確認後に **Finish** を **クリック** します。
 
-=== Task 4: Add a Parallel Step
+=== Task 4: 並列ステップを追加する
 
-Now, add a third step that also runs after the first step, in parallel with the second step.
+次に、最初のステップの後に 2 つ目と並列で実行される 3 つ目のステップを追加します。
 
-. **Add another linked step from the first node.**
+. **最初のノードから別の連結ステップを追加する。**
 +
-**Hover** over the `apache101` node again, **click** the **+** icon, and select **Add node**.
+再度 `apache101` ノードに **マウスオーバー** し、**+** アイコンを **クリック** して **Add node** を選択します。
 
-. **Configure the third node.**
+. **3 つ目のノードを設定する。**
 +
 * **Node Type:** `Job Template` (default)
 * **Job Template:** `Set motd`
@@ -124,36 +124,36 @@ Now, add a third step that also runs after the first step, in parallel with the 
 * **Convergence:** `Any`
 * **Node alias:** `motd201`
 
-. **Save the node.**
+. **ノードを保存する。**
 +
-**Click** **Next**, review the details, and then **click** **Finish**.
+**Next** を **クリック** し、内容確認後に **Finish** を **クリック** します。
 
-. **Save the entire workflow.**
+. **workflow 全体を保存する。**
 +
-Finally, **click** the blue **Save** button in the top right corner of the Visualizer. If you miss this step, you will lose your changes!
+最後に、Visualizer 右上の青色 **Save** ボタンを **クリック** します。この手順を忘れると変更が失われます。
 
-=== Task 5: Launch the Workflow
+=== Task 5: Workflow を起動する
 
-Now you are ready to run your multi-step workflow.
+これで多段 workflow を実行する準備ができました。
 
-. **Launch the workflow from the Visualizer.**
+. **Visualizer から workflow を起動する。**
 +
-While still in the Workflow Visualizer, **click** the **Launch** button in the top right.
+Workflow Visualizer 画面のまま、右上の **Launch** ボタンを **クリック** します。
 
-. **Observe the execution.**
+. **実行を確認する。**
 +
-You will be taken to a real-time view of the workflow execution. You will notice the `apache101` job runs first. Once it succeeds, both the `extended201` and `motd201` jobs will run in parallel. A green checkmark (✅) on each node indicates a successful run.
+workflow 実行のリアルタイムビューに移動します。最初に `apache101` ジョブが実行され、成功後に `extended201` と `motd201` が並列実行されます。各ノードの緑のチェックマーク（✅）は成功を示します。
 
-. **(Alternative) Launch from the Templates list.**
+. **（別方法）Templates 一覧から起動する。**
 +
-You can also launch the workflow by navigating back to the **Templates** page and clicking the **Launch** icon (🚀) next to `Your first workflow`.
+**Templates** ページに戻り、`Your first workflow` の横にある **Launch** アイコン（🚀）をクリックして起動することもできます。
 
 ---
 
-== Next Steps
+== 次のステップ
 
-Press the `Check` button below to proceed to the next challenge.
+次のチャレンジに進むには、下の `Check` ボタンを押してください。
 
-== Troubleshooting
+== トラブルシューティング
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[open an issue on GitHub].
+問題が発生した場合や不具合を見つけた場合は、link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[GitHub で issue を作成してください]。

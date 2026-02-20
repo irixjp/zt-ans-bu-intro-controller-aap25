@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ラボガイド: Automation Controller 入門 :: Introduction to Ansible Automation Controller 2.5</title>
-    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/modules/module-02.html">
-    <link rel="prev" href="module-01.html">
-    <link rel="next" href="module-03.html">
+    <title>ラボガイド: Job Template の作成 :: Introduction to Ansible Automation Controller 2.5</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/modules/module-06.html">
+    <link rel="prev" href="module-05.html">
+    <link rel="next" href="module-07.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -46,7 +46,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="module-01.html">Ansible Automation Platform インタラクティブラボへようこそ</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="module-02.html">ラボガイド: Automation Controller 入門</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -58,7 +58,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="module-05.html">ラボガイド: Credentials を理解する</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="module-06.html">ラボガイド: Job Template の作成</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,17 +101,17 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">演習</a></li>
-    <li><a href="module-02.html">ラボガイド: Automation Controller 入門</a></li>
+    <li><a href="module-06.html">ラボガイド: Job Template の作成</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">ラボガイド: Automation Controller 入門</h1>
+<h1 class="page">ラボガイド: Job Template の作成</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>ダッシュボード、インベントリー、プロジェクト、ジョブテンプレートを含む automation controller Web UI の入門ガイド。</em></p>
+<p><em>Job Template を作成して起動し、automation controller で playbook を実行するためのガイド。</em></p>
 </div>
 <hr>
 </div>
@@ -120,66 +120,38 @@
 <h2 id="_ラボ概要"><a class="anchor" href="#_ラボ概要"></a>ラボ概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このセクションでは、このラボで操作する automation controller UI の主要コンポーネントを紹介します。</p>
-</div>
-<div class="sect2">
-<h3 id="_ansible_automation_platform_へようこそ"><a class="anchor" href="#_ansible_automation_platform_へようこそ"></a>Ansible Automation Platform へようこそ</h3>
-<div class="paragraph">
-<p>次の章では、Web UI ダッシュボードを確認し、<strong>Inventory</strong>、<strong>Projects</strong>、<strong>Job Templates</strong> の各セクションを操作します。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_automation_platform_の概要"><a class="anchor" href="#_automation_platform_の概要"></a>Automation Platform の概要</h3>
-<div class="paragraph">
-<p><strong>Overview</strong> 画面はメインダッシュボードです。hosts、projects、inventories の概要が表示され、各数値は対応オブジェクトへのリンクになっています。リソース数の下には Job Activity グラフと、最近の Jobs、Projects、Inventories のカード形式サマリーが表示されます。</p>
+<p>automation controller では、<strong>job templates</strong> は <code>ansible-playbook</code> コマンドと、CLI 実行時に使える各種フラグを視覚化したものです。Ansible Playbook を実行する主要な仕組みです。</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/Oct-16-2024_at_02.01.47-image.png" alt="Automation controller overview dashboard">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_automation_controller_jobs_ビュー"><a class="anchor" href="#_automation_controller_jobs_ビュー"></a>Automation Controller Jobs ビュー</h3>
-<div class="paragraph">
-<p>左側ナビゲーションバーの <strong>Jobs</strong> をクリックすると <strong>Jobs</strong> ビューを開けます。このビューには、プロジェクト同期、SCM 更新、playbook 実行など、これまでに実行されたすべてのジョブが表示されます。</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/ug-dashboard-jobs-view.png" alt="Jobs view in automation controller">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_schedules_ビュー"><a class="anchor" href="#_schedules_ビュー"></a>Schedules ビュー</h3>
-<div class="paragraph">
-<p>左側ナビゲーションメニューの <strong>Automation Execution</strong> → <strong>Schedules</strong> をクリックすると <strong>Schedules</strong> ビューを開けます。このビューには、定期実行するように設定されたスケジュール済みジョブが表示されます。ジョブ起動、インベントリーソース同期、バージョン管理からのプロジェクト内容取り込みに利用できます。</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/Oct-16-2024_at_02.12.32-image.png" alt="Schedules view in automation controller">
+<img src="_images/job-templates-home-with-example-job-template.png" alt="Job Templates list view in automation controller">
 </div>
 </div>
 <hr>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_ラボガイド_ハンズオンタスク"><a class="anchor" href="#_ラボガイド_ハンズオンタスク"></a>ラボガイド: ハンズオンタスク</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Introduction to automation controller</strong> ラボへようこそ。これ以降のチャレンジでは、<em>Writing your first playbook</em> ラボの内容を踏まえて、Web UI から Ansible Playbook を実行する方法を学びます。</p>
+<p><strong>Job Template</strong> は、Ansible Playbook 実行の定義とパラメーターのセットです。同じジョブを何度も実行する用途に有効で、Ansible コンテンツの再利用やチーム間のコラボレーションを促進します。</p>
 </div>
 <div class="paragraph">
-<p>新しい統合 UI には複数のセクションがありますが、このラボでは <strong>Automation Execution (Automation controller)</strong> ビューに注目します。</p>
+<p>Job Template を作成するには、前のチャレンジで作成した <strong>Project</strong> が必要です。Project には複数 playbook を含められますが、Job Template で一度に実行できる playbook は 1 つだけです。</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/Oct-16-2024_at_02.36.20-image.png" alt="Automation Execution menu highlighted">
-</div>
-</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p>左側の画面はログインページです。続行するため、以下の認証情報でログインしてください。</p>
+<p><strong>Job Template</strong> と <strong>Jinja template</strong> を混同しないでください。Jinja templates は、実行時に変数を置き換えて動的コンテンツ（設定ファイルなど）を生成するためのファイルで、別の概念です。</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -188,6 +160,9 @@
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
+<div class="paragraph">
+<p>automation controller へのログイン認証情報:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -203,81 +178,137 @@
 </table>
 </div>
 <div class="sect2">
-<h3 id="_task_1_overview_を確認する"><a class="anchor" href="#_task_1_overview_を確認する"></a>Task 1: Overview を確認する</h3>
+<h3 id="_task_1_job_template_を作成する"><a class="anchor" href="#_task_1_job_template_を作成する"></a>Task 1: Job Template を作成する</h3>
 <div class="paragraph">
-<p>最初のタスクでは <strong>Overview</strong> ダッシュボードを確認します。初期状態では最近のアクティビティが少ないため情報は少なめですが、ラボ完了後に再度確認すると違いが分かります。</p>
-</div>
-<div class="paragraph">
-<p>次のセクションがあります。</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Resource counts:</strong> <strong>hosts</strong>、<strong>projects</strong>、<strong>inventories</strong> のサマリー</p>
-</li>
-<li>
-<p><strong>Job activity:</strong> 過去1か月のジョブ実行を示すグラフ</p>
-</li>
-<li>
-<p><strong>Jobs:</strong> 最近実行されたジョブの一覧</p>
-</li>
-<li>
-<p><strong>Projects:</strong> 最近更新されたプロジェクトの一覧</p>
-</li>
-<li>
-<p><strong>Inventories:</strong> 最近更新されたインベントリーの一覧</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Ansible Automation Platform 2.5 の新機能として、クイックスタートガイドとインタラクティブな how-to セクションが追加されており、インストール直後の立ち上がりに便利です。</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/Oct-16-2024_at_02.29.14-image.png" alt="Quick start guides on the dashboard"></span></p>
-</div>
-<div class="paragraph">
-<p>各タイトルや "View all" リンクをクリックして、対応セクションを自由に確認してください。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_task_2_inventories_セクションを確認する"><a class="anchor" href="#_task_2_inventories_セクションを確認する"></a>Task 2: Inventories セクションを確認する</h3>
-<div class="paragraph">
-<p><strong>inventory</strong> は playbook の実行対象となる hosts の集合です。コマンドラインで使う inventory file と同じ概念ですが、追加機能と再利用性があります。</p>
+<p>最初に、inventory、project、playbook、credentials を関連付ける新しい job template を作成します。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Inventories ページへ移動する。</strong></p>
+<p><strong>Templates ページへ移動する。</strong></p>
 <div class="paragraph">
-<p><strong>Overview</strong> ページの <strong>Inventories</strong> リンク、または左側ナビゲーションメニューの <strong>Infrastructure</strong> → <strong>Inventories</strong> から移動します。</p>
+<p>左側ナビゲーションメニューで <strong>Automation Execution</strong> → <strong>Templates</strong> に移動します。</p>
 </div>
 </li>
 <li>
-<p><strong>Demo Inventory を確認する。</strong></p>
+<p><strong>新しい job template を作成する。</strong></p>
 <div class="paragraph">
-<p>事前に用意されている <strong>Demo Inventory</strong> をクリックし、利用可能なフィールドに慣れるために各タブを確認します。後続で独自の inventory を作成します。</p>
+<p>青色の <strong>Create template</strong> ボタンを <strong>クリック</strong> し、<strong>Create job template</strong> を選択します。</p>
+</div>
+</li>
+<li>
+<p><strong>job template の詳細を入力する。</strong></p>
+<div class="paragraph">
+<p>フォームに以下を入力します。</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><strong>Name:</strong> <code>Install Apache</code></p>
+</li>
+<li>
+<p><strong>Job Type:</strong> <code>Run</code></p>
+</li>
+<li>
+<p><strong>Inventory:</strong> <code>Lab-Inventory</code></p>
+</li>
+<li>
+<p><strong>Project:</strong> <code>Apache playbooks</code></p>
+</li>
+<li>
+<p><strong>Playbook:</strong> <code>apache.yml</code></p>
+</li>
+<li>
+<p><strong>Credentials:</strong> <code>lab-credentials</code> を選択</p>
+</li>
+<li>
+<p><strong>Privilege Escalation:</strong> <code>become</code> を有効にするため <strong>チェック</strong></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p><strong>job template を保存する。</strong></p>
+<div class="paragraph">
+<p>他の項目はそのままにして、青色の <strong>Create job template</strong> ボタンを <strong>クリック</strong> します。</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><strong>Credentials</strong> フィールドはすべての job templates で必須ではありませんが、リモートホストへ接続するジョブで正しい machine credentials を選択しないと実行に失敗します。</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_task_2_job_template_を起動する"><a class="anchor" href="#_task_2_job_template_を起動する"></a>Task 2: Job Template を起動する</h3>
+<div class="paragraph">
+<p>job template を作成できたので、実際に起動して playbook を実行します。</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>Templates ページへ移動する。</strong></p>
+<div class="paragraph">
+<p>まだ表示していない場合は、<strong>Automation Execution</strong> → <strong>Templates</strong> に移動します。</p>
+</div>
+</li>
+<li>
+<p><strong>template を起動する。</strong></p>
+<div class="paragraph">
+<p>起動方法は 2 通りあります。</p>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="ulist">
+<ul>
+<li>
+<p>一覧の <code>Install Apache</code> テンプレート横にある <strong>Launch</strong> アイコン（🚀）を <strong>クリック</strong></p>
+</li>
+<li>
+<p><code>Install Apache</code> の名前を <strong>クリック</strong> して詳細ページを開き、青色の <strong>Launch</strong> ボタンを <strong>クリック</strong></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</li>
+<li>
+<p><strong>実行を確認する。</strong></p>
+<div class="paragraph">
+<p>ジョブが実行され、出力ページに移動します。ジョブが <strong>Successful</strong> ステータスで完了することを <strong>確認</strong> します。</p>
 </div>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_task_3_projects_セクションを確認する"><a class="anchor" href="#_task_3_projects_セクションを確認する"></a>Task 3: Projects セクションを確認する</h3>
+<h3 id="_task_3_結果を確認する"><a class="anchor" href="#_task_3_結果を確認する"></a>Task 3: 結果を確認する</h3>
 <div class="paragraph">
-<p><strong>project</strong> は automation controller 内での Ansible Playbook の論理的なグループです。これらの playbook は通常、Git のようなソースコード管理システムに配置されています。</p>
+<p>最後に、Apache Web サーバーが両ノードに正しくインストールされたことを確認します。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Projects ページへ移動する。</strong></p>
+<p><strong>Node1 の Web ページを確認する。</strong></p>
 <div class="paragraph">
-<p>左側ナビゲーションメニューで <strong>Automation Execution</strong> → <strong>Projects</strong> に移動します。</p>
+<p>ラボ画面上部のタブバーで <strong>Node1 Web</strong> タブを <strong>クリック</strong> し、"Hello World" メッセージが表示されることを確認します。</p>
 </div>
 </li>
 <li>
-<p><strong>Demo Project を確認する。</strong></p>
+<p><strong>Node2 の Web ページを確認する。</strong></p>
 <div class="paragraph">
-<p>事前に用意されている <strong>Demo Project</strong> をクリックし、利用可能な各フィールドとタブを確認します。</p>
+<p><strong>Node2 Web</strong> タブを <strong>クリック</strong> し、同じ "Hello World" メッセージが表示されることを確認します。</p>
 </div>
 </li>
 </ol>
@@ -290,7 +321,7 @@
 <h2 id="_次のステップ"><a class="anchor" href="#_次のステップ"></a>次のステップ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>次のチャレンジに進むには、下の <code>Next</code> ボタンを押してください。</p>
+<p>次のチャレンジに進むには、下の <code>Check</code> ボタンを押してください。</p>
 </div>
 </div>
 </div>
@@ -298,13 +329,13 @@
 <h2 id="_トラブルシューティング"><a class="anchor" href="#_トラブルシューティング"></a>トラブルシューティング</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>問題が発生した場合や不具合を見つけた場合は、<a href="https://github.com/ansible/workshops/issues/new?labels=controller-101&amp;title=Issue+with+controller-101-dashboard+AAP25&amp;assignees=leogallego">GitHub で issue を作成してください</a>。</p>
+<p>問題が発生した場合や不具合を見つけた場合は、<a href="https://github.com/ansible/workshops/issues/new?labels=controller-101&amp;title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&amp;assignees=leogallego">GitHub で issue を作成してください</a>。</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="module-01.html" class="query-params-link">Ansible Automation Platform インタラクティブラボへようこそ</a></span>
-  <span class="next"><a href="module-03.html" class="query-params-link">ラボガイド: Inventory の作成</a></span>
+  <span class="prev"><a href="module-05.html" class="query-params-link">ラボガイド: Credentials を理解する</a></span>
+  <span class="next"><a href="module-07.html" class="query-params-link">ラボガイド: 2つ目の Project を作成する</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

@@ -1,139 +1,139 @@
-= Lab Guide: Creating a Job Template with a Survey
+= ラボガイド: Survey 付き Job Template の作成
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-_A guide to creating a fourth Job Template for installing Apache, this time including a Survey to pass variables at runtime._
+_Apache をインストールする 4 つ目の Job Template を作成し、実行時に変数を渡す Survey を含めるためのガイド。_
 
 ---
 
-== Lab Briefing
+== ラボ概要
 
-In the automation controller, **job templates** are a visual representation of the `ansible-playbook` command and all the flags you can use when executing from the command line. They are the primary mechanism for running your Ansible Playbooks.
+automation controller では、**job templates** は `ansible-playbook` コマンドと、CLI 実行時に使える各種フラグを視覚化したものです。Ansible Playbook を実行する主要な仕組みです。
 
 image::job-templates-home-with-example-job-template.png[Job Templates list view in automation controller, opts="border"]
 
 ---
 
-== Lab Guide: Hands-On Tasks
+== ラボガイド: ハンズオンタスク
 
-In this challenge, you will explore the **Survey** feature. Surveys allow you to prompt for user input when a Job Template is launched, making it possible to change a parameter or setting for each run. You will use a survey to customize the `index.html` file deployed by the Apache playbook.
+このチャレンジでは **Survey** 機能を確認します。Survey を使うと Job Template 起動時にユーザー入力を受け付けられるため、実行ごとにパラメーターや設定を変更できます。Apache playbook がデプロイする `index.html` を Survey でカスタマイズします。
 
 [IMPORTANT]
 ====
-Reminder that the credentials to log in to the automation controller are:
+automation controller へのログイン認証情報:
 
 * *Username:* `admin`
 * *Password:* `ansible123!`
 ====
 
-=== Task 1: Create the Job Template
+=== Task 1: Job Template を作成する
 
-First, you will create a new job template that uses a playbook designed to work with a survey variable.
+最初に、survey 変数で動作する playbook を使う新しい job template を作成します。
 
-. **Navigate to the Templates page.**
+. **Templates ページへ移動する。**
 +
-In the left navigation menu, go to **Automation Execution** → **Templates**.
+左側ナビゲーションメニューで **Automation Execution** → **Templates** に移動します。
 
-. **Create a new job template.**
+. **新しい job template を作成する。**
 +
-**Click** the blue **Create template** button and select **Create job template**.
+青色の **Create template** ボタンを **クリック** し、**Create job template** を選択します。
 
-. **Enter the job template details.**
+. **job template の詳細を入力する。**
 +
-Fill out the form with the following information:
+フォームに以下を入力します。
 +
 * **Name:** `Install Apache with Survey`
 * **Job Type:** `Run`
 * **Inventory:** `Lab-Inventory`
 * **Project:** `Apache playbooks`
 * **Playbook:** `apache_template.yml`
-* **Credentials:** Select `lab-credentials`.
-* **Privilege Escalation:** **Check** this box to enable `become`.
+* **Credentials:** `lab-credentials` を選択
+* **Privilege Escalation:** `become` を有効にするため **チェック**
 
-. **Save the job template.**
+. **job template を保存する。**
 +
-Leave all other fields as they are and **click** the blue **Create job template** button.
+他の項目はそのままにして、青色の **Create job template** ボタンを **クリック** します。
 
-=== Task 2: Create the Survey
+=== Task 2: Survey を作成する
 
-Now you will add a survey to the job template to ask for a user's name.
+次に、job template に survey を追加してユーザー名を尋ねます。
 
-. **Navigate to the Survey tab.**
+. **Survey タブへ移動する。**
 +
-Once the Job Template is saved, you will be on its *Details* page. **Click** the **Survey** tab.
+Job Template を保存すると *Details* ページに移動します。**Survey** タブを **クリック** します。
 
-. **Create a new survey question.**
+. **新しい survey 質問を作成する。**
 +
-**Click** the blue **Create survey question** button.
+青色の **Create survey question** ボタンを **クリック** します。
 
-. **Configure the survey question.**
+. **survey 質問を設定する。**
 +
-Fill out the form with the following details:
+フォームに以下を入力します。
 +
 --
 * **Question:** `What is your name, fellow student?`
 * **Description:** `Enter your name or nickname to see it work!`
 * **Answer variable name:** `student_name`
-* **Answer type:** `Text` (default)
-* **Required:** Make sure this is **NOT** checked.
+* **Answer type:** `Text`（デフォルト）
+* **Required:** **チェックしない**
 * **Default answer:** `Skippy`
 --
 
-. **Save the survey question.**
+. **survey 質問を保存する。**
 +
-**Click** the blue **Create survey question** button at the bottom.
+下部の青色 **Create survey question** ボタンを **クリック** します。
 
-. **Enable the survey.**
+. **survey を有効化する。**
 +
-On the Survey tab, you will now see a toggle that reads **Survey disabled**. **Click** this toggle to **enable** the survey.
+Survey タブで **Survey disabled** と表示されるトグルが出ます。このトグルを **クリック** して survey を **有効化** します。
 
-=== Task 3: Launch the Template and Use the Survey
+=== Task 3: Template を起動して Survey を使う
 
-Finally, launch the template and provide a custom value through the survey.
+最後に template を起動し、survey でカスタム値を入力します。
 
-. **Launch the template.**
+. **template を起動する。**
 +
-**Click** the **Launch template** button at the top of the `Install Apache with Survey` job template screen.
+`Install Apache with Survey` job template 画面上部の **Launch template** ボタンを **クリック** します。
 
-. **Answer the survey question.**
+. **survey 質問に回答する。**
 +
-A survey prompt will appear. **Delete** the default answer (`Skippy`) and **enter your own name**.
+survey 入力画面が表示されます。デフォルト回答（`Skippy`）を **削除** し、**自分の名前** を入力します。
 
-. **Launch the job.**
+. **ジョブを起動する。**
 +
-**Click** the **Next** button, review the details, and then **click** the **Finish** button to launch the job.
+**Next** ボタンを **クリック** し、内容確認後に **Finish** ボタンを **クリック** してジョブを起動します。
 
-. **Verify the result.**
+. **結果を確認する。**
 +
-Once the job completes successfully, **navigate** to the **Node1 Web** tab at the top of the lab screen. You may need to refresh the page. You should see the Apache message with your name displayed below it!
+ジョブが成功したら、ラボ画面上部の **Node1 Web** タブに **移動** します。必要に応じてページをリロードしてください。Apache メッセージの下に入力した名前が表示されます。
 +
 image:May-13-2025_at_21.04.19-image.png[Customized Apache welcome page, opts="border"]
 
 ---
 
-== Congratulations!
+== おめでとうございます！
 
-You have finished the lab successfully! 🎉
+ラボは正常に完了しました！ 🎉
 
 [IMPORTANT]
 ====
-Remember to press the green **Check**, **Next**, or **Skip** button below to complete the lab. We appreciate all feedback!
+ラボを完了するため、下の緑色の **Check**、**Next**、または **Skip** ボタンを押してください。フィードバックも歓迎します。
 ====
 
-=== Claim Your Badge
+=== バッジを受け取る
 
-Scan the following QR code to claim your Ansible Forum badge for completing the lab:
+次の QR コードをスキャンして、このラボ完了の Ansible Forum バッジを受け取ってください。
 
-image::../assets/May-13-2025_at_21.28.27-image.png[QR code for Ansible Forum badge, opts="border"]
+image::May-13-2025_at_21.28.27-image.png[QR code for Ansible Forum badge, opts="border"]
 
-If you don't have an Ansible Forum account yet, no worries! You can sign up using the same link. To keep it simple, you can register or log in with your Google or GitHub account, and an account will be created for you automatically.
+まだ Ansible Forum アカウントがない場合でも問題ありません。同じリンクから登録できます。Google または GitHub アカウントでログインすれば、自動的にアカウントが作成されます。
 
-Once you sign up, remember to introduce yourself in link:https://forum.ansible.com/t/introduce-yourself-2025-edition/39892[this Forum topic]!
+登録後は、link:https://forum.ansible.com/t/introduce-yourself-2025-edition/39892[this Forum topic] で自己紹介するのを忘れないでください。
 
 ---
 
-== Troubleshooting
+== トラブルシューティング
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[open an issue on GitHub].
+問題が発生した場合や不具合を見つけた場合は、link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[GitHub で issue を作成してください]。

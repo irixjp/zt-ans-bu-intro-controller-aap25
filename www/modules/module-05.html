@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>ラボガイド: Automation Controller 入門 :: Introduction to Ansible Automation Controller 2.5</title>
-    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/modules/module-02.html">
-    <link rel="prev" href="module-01.html">
-    <link rel="next" href="module-03.html">
+    <title>ラボガイド: Credentials を理解する :: Introduction to Ansible Automation Controller 2.5</title>
+    <link rel="canonical" href="https://redhat-scholars.github.io/course-template/modules/module-05.html">
+    <link rel="prev" href="module-04.html">
+    <link rel="next" href="module-06.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../_/css/site.css">
 <link rel="icon" href="../_/img/favicon.ico" type="image/x-icon">
@@ -46,7 +46,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="module-01.html">Ansible Automation Platform インタラクティブラボへようこそ</a>
   </li>
-  <li class="nav-item is-current-page" data-depth="1">
+  <li class="nav-item" data-depth="1">
     <a class="nav-link" href="module-02.html">ラボガイド: Automation Controller 入門</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -55,7 +55,7 @@
   <li class="nav-item" data-depth="1">
     <a class="nav-link" href="module-04.html">ラボガイド: 最初の Project を作成する</a>
   </li>
-  <li class="nav-item" data-depth="1">
+  <li class="nav-item is-current-page" data-depth="1">
     <a class="nav-link" href="module-05.html">ラボガイド: Credentials を理解する</a>
   </li>
   <li class="nav-item" data-depth="1">
@@ -101,17 +101,17 @@
 <nav class="breadcrumbs" aria-label="breadcrumbs">
   <ul>
     <li><a href="index.html">演習</a></li>
-    <li><a href="module-02.html">ラボガイド: Automation Controller 入門</a></li>
+    <li><a href="module-05.html">ラボガイド: Credentials を理解する</a></li>
   </ul>
 </nav>
 </div>
   <div class="content">
 <article class="doc">
-<h1 class="page">ラボガイド: Automation Controller 入門</h1>
+<h1 class="page">ラボガイド: Credentials を理解する</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p><em>ダッシュボード、インベントリー、プロジェクト、ジョブテンプレートを含む automation controller Web UI の入門ガイド。</em></p>
+<p><em>Credentials セクションを確認し、automation controller の認証オプションを理解するためのガイド。</em></p>
 </div>
 <hr>
 </div>
@@ -120,66 +120,41 @@
 <h2 id="_ラボ概要"><a class="anchor" href="#_ラボ概要"></a>ラボ概要</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>このセクションでは、このラボで操作する automation controller UI の主要コンポーネントを紹介します。</p>
-</div>
-<div class="sect2">
-<h3 id="_ansible_automation_platform_へようこそ"><a class="anchor" href="#_ansible_automation_platform_へようこそ"></a>Ansible Automation Platform へようこそ</h3>
-<div class="paragraph">
-<p>次の章では、Web UI ダッシュボードを確認し、<strong>Inventory</strong>、<strong>Projects</strong>、<strong>Job Templates</strong> の各セクションを操作します。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_automation_platform_の概要"><a class="anchor" href="#_automation_platform_の概要"></a>Automation Platform の概要</h3>
-<div class="paragraph">
-<p><strong>Overview</strong> 画面はメインダッシュボードです。hosts、projects、inventories の概要が表示され、各数値は対応オブジェクトへのリンクになっています。リソース数の下には Job Activity グラフと、最近の Jobs、Projects、Inventories のカード形式サマリーが表示されます。</p>
+<p><strong>Credentials</strong> は、マシンに対するジョブ実行時の認証、inventory source との同期、バージョン管理システムからの project 取り込み時の認証に使用されます。</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="_images/Oct-16-2024_at_02.01.47-image.png" alt="Automation controller overview dashboard">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_automation_controller_jobs_ビュー"><a class="anchor" href="#_automation_controller_jobs_ビュー"></a>Automation Controller Jobs ビュー</h3>
-<div class="paragraph">
-<p>左側ナビゲーションバーの <strong>Jobs</strong> をクリックすると <strong>Jobs</strong> ビューを開けます。このビューには、プロジェクト同期、SCM 更新、playbook 実行など、これまでに実行されたすべてのジョブが表示されます。</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/ug-dashboard-jobs-view.png" alt="Jobs view in automation controller">
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_schedules_ビュー"><a class="anchor" href="#_schedules_ビュー"></a>Schedules ビュー</h3>
-<div class="paragraph">
-<p>左側ナビゲーションメニューの <strong>Automation Execution</strong> → <strong>Schedules</strong> をクリックすると <strong>Schedules</strong> ビューを開けます。このビューには、定期実行するように設定されたスケジュール済みジョブが表示されます。ジョブ起動、インベントリーソース同期、バージョン管理からのプロジェクト内容取り込みに利用できます。</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/Oct-16-2024_at_02.12.32-image.png" alt="Schedules view in automation controller">
+<img src="_images/credentials-demo-edit-details.png" alt="Details of a machine credential">
 </div>
 </div>
 <hr>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_ラボガイド_ハンズオンタスク"><a class="anchor" href="#_ラボガイド_ハンズオンタスク"></a>ラボガイド: ハンズオンタスク</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong>Introduction to automation controller</strong> ラボへようこそ。これ以降のチャレンジでは、<em>Writing your first playbook</em> ラボの内容を踏まえて、Web UI から Ansible Playbook を実行する方法を学びます。</p>
+<p><strong>Credentials</strong> は Ansible Automation Platform で、デバイスへのジョブ実行、inventory source 同期、バージョン管理からの project 取り込み時の認証に利用されます。</p>
 </div>
 <div class="paragraph">
-<p>新しい統合 UI には複数のセクションがありますが、このラボでは <strong>Automation Execution (Automation controller)</strong> ビューに注目します。</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/Oct-16-2024_at_02.36.20-image.png" alt="Automation Execution menu highlighted">
-</div>
+<p>Credentials は automation controller に暗号化して保存され、どのユーザーでも平文では取得できません。ユーザーやチームに、機密情報を開示せずに credential 利用権限を付与できます。</p>
 </div>
 <div class="paragraph">
-<p>左側の画面はログインページです。続行するため、以下の認証情報でログインしてください。</p>
+<p>サポートされる credential type は 20 種類以上あり、トークン、ユーザー名/パスワード、SSH キーなどがあります。今回は、SSH でサーバー接続に使う <strong>Machine</strong> credential type を確認します。</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>この演習では確認のみを行います。credentials は事前投入済みなので、変更はしないでください。</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -188,6 +163,9 @@
 <i class="fa icon-important" title="Important"></i>
 </td>
 <td class="content">
+<div class="paragraph">
+<p>automation controller へのログイン認証情報:</p>
+</div>
 <div class="ulist">
 <ul>
 <li>
@@ -203,81 +181,80 @@
 </table>
 </div>
 <div class="sect2">
-<h3 id="_task_1_overview_を確認する"><a class="anchor" href="#_task_1_overview_を確認する"></a>Task 1: Overview を確認する</h3>
+<h3 id="_task_1_credentials_セクションを確認する"><a class="anchor" href="#_task_1_credentials_セクションを確認する"></a>Task 1: Credentials セクションを確認する</h3>
 <div class="paragraph">
-<p>最初のタスクでは <strong>Overview</strong> ダッシュボードを確認します。初期状態では最近のアクティビティが少ないため情報は少なめですが、ラボ完了後に再度確認すると違いが分かります。</p>
-</div>
-<div class="paragraph">
-<p>次のセクションがあります。</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p><strong>Resource counts:</strong> <strong>hosts</strong>、<strong>projects</strong>、<strong>inventories</strong> のサマリー</p>
-</li>
-<li>
-<p><strong>Job activity:</strong> 過去1か月のジョブ実行を示すグラフ</p>
-</li>
-<li>
-<p><strong>Jobs:</strong> 最近実行されたジョブの一覧</p>
-</li>
-<li>
-<p><strong>Projects:</strong> 最近更新されたプロジェクトの一覧</p>
-</li>
-<li>
-<p><strong>Inventories:</strong> 最近更新されたインベントリーの一覧</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Ansible Automation Platform 2.5 の新機能として、クイックスタートガイドとインタラクティブな how-to セクションが追加されており、インストール直後の立ち上がりに便利です。</p>
-</div>
-<div class="paragraph">
-<p><span class="image"><img src="_images/Oct-16-2024_at_02.29.14-image.png" alt="Quick start guides on the dashboard"></span></p>
-</div>
-<div class="paragraph">
-<p>各タイトルや "View all" リンクをクリックして、対応セクションを自由に確認してください。</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_task_2_inventories_セクションを確認する"><a class="anchor" href="#_task_2_inventories_セクションを確認する"></a>Task 2: Inventories セクションを確認する</h3>
-<div class="paragraph">
-<p><strong>inventory</strong> は playbook の実行対象となる hosts の集合です。コマンドラインで使う inventory file と同じ概念ですが、追加機能と再利用性があります。</p>
+<p>最初に Credentials セクションへ移動し、事前投入済みの credential を確認します。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Inventories ページへ移動する。</strong></p>
+<p><strong>Credentials ページへ移動する。</strong></p>
 <div class="paragraph">
-<p><strong>Overview</strong> ページの <strong>Inventories</strong> リンク、または左側ナビゲーションメニューの <strong>Infrastructure</strong> → <strong>Inventories</strong> から移動します。</p>
+<p>左側ナビゲーションメニューで <strong>Automation Execution</strong> → <strong>Infrastructure</strong> → <strong>Credentials</strong> に移動します。</p>
 </div>
 </li>
 <li>
-<p><strong>Demo Inventory を確認する。</strong></p>
+<p><strong>credentials 一覧を表示する。</strong></p>
 <div class="paragraph">
-<p>事前に用意されている <strong>Demo Inventory</strong> をクリックし、利用可能なフィールドに慣れるために各タブを確認します。後続で独自の inventory を作成します。</p>
+<p>名前とタイプで分類された、検索可能な credentials 一覧が表示されます。</p>
+</div>
+</li>
+<li>
+<p><strong>ラボ用 credential を開く。</strong></p>
+<div class="paragraph">
+<p><strong>Machine</strong> タイプの <code>lab-credentials</code> を <strong>探して</strong>、名前を <strong>クリック</strong> します。</p>
+</div>
+</li>
+<li>
+<p><strong>credential の詳細を確認する。</strong></p>
+<div class="paragraph">
+<p><strong>Details</strong> タブで、<strong>SSH Private Key</strong> フィールドが <strong>Encrypted</strong> と表示されることを確認します。</p>
+</div>
+</li>
+<li>
+<p><strong>credential のアクセス権を確認する。</strong></p>
+<div class="paragraph">
+<p><strong>Team Access</strong> と <strong>User Access</strong> タブを <strong>クリック</strong> し、この credential を使用できる users と teams を確認します。</p>
+</div>
+</li>
+<li>
+<p><strong>credential の使用状況を確認する。</strong></p>
+<div class="paragraph">
+<p><strong>Job Templates</strong> タブを <strong>クリック</strong> します。このタブには、この credential を利用中のジョブが表示されます。現時点では空のはずです。</p>
 </div>
 </li>
 </ol>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_task_3_projects_セクションを確認する"><a class="anchor" href="#_task_3_projects_セクションを確認する"></a>Task 3: Projects セクションを確認する</h3>
+<h3 id="_task_2_machine_credential_を確認する"><a class="anchor" href="#_task_2_machine_credential_を確認する"></a>Task 2: Machine Credential を確認する</h3>
 <div class="paragraph">
-<p><strong>project</strong> は automation controller 内での Ansible Playbook の論理的なグループです。これらの playbook は通常、Git のようなソースコード管理システムに配置されています。</p>
+<p>次に credential の編集画面に入り、利用可能なフィールドを確認します。</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><strong>Projects ページへ移動する。</strong></p>
+<p><strong>credential の編集画面を開く。</strong></p>
 <div class="paragraph">
-<p>左側ナビゲーションメニューで <strong>Automation Execution</strong> → <strong>Projects</strong> に移動します。</p>
+<p><code>lab-credentials</code> の <strong>Details</strong> タブに戻り、<strong>Edit credential</strong> ボタンを <strong>クリック</strong> します。</p>
 </div>
 </li>
 <li>
-<p><strong>Demo Project を確認する。</strong></p>
+<p><strong>利用可能なフィールドを確認する。</strong></p>
 <div class="paragraph">
-<p>事前に用意されている <strong>Demo Project</strong> をクリックし、利用可能な各フィールドとタブを確認します。</p>
+<p>Machine credential で利用できる設定項目を確認しますが、<strong>何も編集・変更しないでください</strong>。</p>
+</div>
+</li>
+<li>
+<p><strong>暗号化キーを確認する。</strong></p>
+<div class="paragraph">
+<p><strong>SSH Private Key</strong> フィールドは値の <strong>Reset</strong> のみ可能です。前述の通り、キーは暗号化されるため、一度保存すると UI からは取得できません。</p>
+</div>
+</li>
+<li>
+<p><strong>編集画面を閉じる。</strong></p>
+<div class="paragraph">
+<p>誤操作を避けるため、<strong>Cancel</strong> ボタンを <strong>クリック</strong> して終了します。</p>
 </div>
 </li>
 </ol>
@@ -290,7 +267,7 @@
 <h2 id="_次のステップ"><a class="anchor" href="#_次のステップ"></a>次のステップ</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>次のチャレンジに進むには、下の <code>Next</code> ボタンを押してください。</p>
+<p>次のチャレンジに進むには、下の <code>Check</code> ボタンを押してください。</p>
 </div>
 </div>
 </div>
@@ -298,13 +275,13 @@
 <h2 id="_トラブルシューティング"><a class="anchor" href="#_トラブルシューティング"></a>トラブルシューティング</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>問題が発生した場合や不具合を見つけた場合は、<a href="https://github.com/ansible/workshops/issues/new?labels=controller-101&amp;title=Issue+with+controller-101-dashboard+AAP25&amp;assignees=leogallego">GitHub で issue を作成してください</a>。</p>
+<p>問題が発生した場合や不具合を見つけた場合は、<a href="https://github.com/ansible/workshops/issues/new?labels=controller-101&amp;title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&amp;assignees=leogallego">GitHub で issue を作成してください</a>。</p>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="module-01.html" class="query-params-link">Ansible Automation Platform インタラクティブラボへようこそ</a></span>
-  <span class="next"><a href="module-03.html" class="query-params-link">ラボガイド: Inventory の作成</a></span>
+  <span class="prev"><a href="module-04.html" class="query-params-link">ラボガイド: 最初の Project を作成する</a></span>
+  <span class="next"><a href="module-06.html" class="query-params-link">ラボガイド: Job Template の作成</a></span>
 </nav>
 </article>
 <aside class="toc sidebar" data-title="Contents" data-levels="2">

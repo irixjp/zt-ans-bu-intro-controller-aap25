@@ -1,112 +1,112 @@
-= Lab Guide: Creating a Job Template
+= ラボガイド: Job Template の作成
 :notoc:
 :toc-title: Table of Contents
 :nosectnums:
 :icons: font
 
-_A guide to running a playbook with the automation controller by creating and launching a Job Template._
+_Job Template を作成して起動し、automation controller で playbook を実行するためのガイド。_
 
 ---
 
-== Lab Briefing
+== ラボ概要
 
-In the automation controller, **job templates** are a visual representation of the `ansible-playbook` command and all the flags you can use when executing from the command line. They are the primary mechanism for running your Ansible Playbooks.
+automation controller では、**job templates** は `ansible-playbook` コマンドと、CLI 実行時に使える各種フラグを視覚化したものです。Ansible Playbook を実行する主要な仕組みです。
 
 image::job-templates-home-with-example-job-template.png[Job Templates list view in automation controller, opts="border"]
 
 ---
 
-== Lab Guide: Hands-On Tasks
+== ラボガイド: ハンズオンタスク
 
-A **Job Template** is a definition and set of parameters for running an Ansible Playbook. Job Templates are useful for executing the same job many times while also encouraging the reuse of Ansible content and collaboration between teams.
+**Job Template** は、Ansible Playbook 実行の定義とパラメーターのセットです。同じジョブを何度も実行する用途に有効で、Ansible コンテンツの再利用やチーム間のコラボレーションを促進します。
 
-To create a Job Template, you need a **Project** to source your playbooks from, which you created in the previous challenge. While a Project might contain multiple playbooks, a Job Template can only run one playbook at a time.
+Job Template を作成するには、前のチャレンジで作成した **Project** が必要です。Project には複数 playbook を含められますが、Job Template で一度に実行できる playbook は 1 つだけです。
 
 [WARNING]
 ====
-Do not confuse a **Job Template** with a **Jinja template**. Jinja templates are files used to create dynamic content (like configuration files) by replacing variables during runtime. They are different concepts.
+**Job Template** と **Jinja template** を混同しないでください。Jinja templates は、実行時に変数を置き換えて動的コンテンツ（設定ファイルなど）を生成するためのファイルで、別の概念です。
 ====
 
 [IMPORTANT]
 ====
-Reminder that the credentials to log in to the automation controller are:
+automation controller へのログイン認証情報:
 
 * *Username:* `admin`
 * *Password:* `ansible123!`
 ====
 
-=== Task 1: Create the Job Template
+=== Task 1: Job Template を作成する
 
-First, you will create a new job template that links your inventory, project, playbook, and credentials together.
+最初に、inventory、project、playbook、credentials を関連付ける新しい job template を作成します。
 
-. **Navigate to the Templates page.**
+. **Templates ページへ移動する。**
 +
-In the left navigation menu, go to **Automation Execution** → **Templates**.
+左側ナビゲーションメニューで **Automation Execution** → **Templates** に移動します。
 
-. **Create a new job template.**
+. **新しい job template を作成する。**
 +
-**Click** the blue **Create template** button and select **Create job template**.
+青色の **Create template** ボタンを **クリック** し、**Create job template** を選択します。
 
-. **Enter the job template details.**
+. **job template の詳細を入力する。**
 +
-Fill out the form with the following information:
+フォームに以下を入力します。
 +
 * **Name:** `Install Apache`
 * **Job Type:** `Run`
 * **Inventory:** `Lab-Inventory`
 * **Project:** `Apache playbooks`
 * **Playbook:** `apache.yml`
-* **Credentials:** Select `lab-credentials`.
-* **Privilege Escalation:** **Check** this box to enable `become`.
+* **Credentials:** `lab-credentials` を選択
+* **Privilege Escalation:** `become` を有効にするため **チェック**
 
-. **Save the job template.**
+. **job template を保存する。**
 +
-Leave all other fields as they are and **click** the blue **Create job template** button.
+他の項目はそのままにして、青色の **Create job template** ボタンを **クリック** します。
 
 [IMPORTANT]
 ====
-The *Credentials* field is not mandatory for all job templates, but if you do not select the correct machine credentials for a job that connects to a remote host, the execution will fail.
+*Credentials* フィールドはすべての job templates で必須ではありませんが、リモートホストへ接続するジョブで正しい machine credentials を選択しないと実行に失敗します。
 ====
 
-=== Task 2: Launch the Job Template
+=== Task 2: Job Template を起動する
 
-Now that the job template is created, you can launch it to run the playbook.
+job template を作成できたので、実際に起動して playbook を実行します。
 
-. **Navigate to the Templates page.**
+. **Templates ページへ移動する。**
 +
-If you are not already there, go to **Automation Execution** → **Templates**.
+まだ表示していない場合は、**Automation Execution** → **Templates** に移動します。
 
-. **Launch the template.**
+. **template を起動する。**
 +
-You can launch the template in two ways:
+起動方法は 2 通りあります。
 +
 --
-* **Click** the **Launch** icon (🚀) next to the `Install Apache` template in the list.
-* **Click** on the name `Install Apache` to open its details page, then **click** the blue **Launch** button.
+* 一覧の `Install Apache` テンプレート横にある **Launch** アイコン（🚀）を **クリック**
+* `Install Apache` の名前を **クリック** して詳細ページを開き、青色の **Launch** ボタンを **クリック**
 --
 
-. **Verify the execution.**
+. **実行を確認する。**
 +
-The job will run, and you will be taken to the output page. **Verify** that the job completes with a **Successful** status.
+ジョブが実行され、出力ページに移動します。ジョブが **Successful** ステータスで完了することを **確認** します。
 
-=== Task 3: Verify the Result
+=== Task 3: 結果を確認する
 
-Finally, verify that the Apache web server was installed correctly on both nodes.
+最後に、Apache Web サーバーが両ノードに正しくインストールされたことを確認します。
 
-. **Check the Node1 web page.**
+. **Node1 の Web ページを確認する。**
 +
-In the tab bar at the top of your lab screen, **click** the **Node1 Web** tab and verify you see the "Hello World" message.
+ラボ画面上部のタブバーで **Node1 Web** タブを **クリック** し、"Hello World" メッセージが表示されることを確認します。
 
-. **Check the Node2 web page.**
+. **Node2 の Web ページを確認する。**
 +
-**Click** the **Node2 Web** tab and verify you see the same "Hello World" message.
+**Node2 Web** タブを **クリック** し、同じ "Hello World" メッセージが表示されることを確認します。
 
 ---
 
-== Next Steps
+== 次のステップ
 
-Press the `Check` button below to proceed to the next challenge.
+次のチャレンジに進むには、下の `Check` ボタンを押してください。
 
-== Troubleshooting
+== トラブルシューティング
 
-If you have encountered an issue or have noticed something not quite right, please link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[open an issue on GitHub].
+問題が発生した場合や不具合を見つけた場合は、link:https://github.com/ansible/workshops/issues/new?labels=controller-101&title=Issue+with+Intro+to+Controller+slug+ID:+controller-101-inventory+AAP25&assignees=leogallego[GitHub で issue を作成してください]。
